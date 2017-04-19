@@ -1,0 +1,25 @@
+From 1343f095b8354e532f50c870746212a054f8ca24 Mon Sep 17 00:00:00 2001
+From: benjitobias <benjitobias@gmail.com>
+Date: Sun, 16 Apr 2017 22:19:29 +0300
+Subject: [PATCH] Edited Makefile for Eudyptula
+
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index efa267a..2ba2f12c 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,7 +1,7 @@
+ VERSION = 4
+ PATCHLEVEL = 11
+ SUBLEVEL = 0
+-EXTRAVERSION = -rc6
++EXTRAVERSION = -eudyptula-rc6
+ NAME = Fearless Coyote
+ 
+ # *DOCUMENTATION*
+-- 
+2.7.4
+
