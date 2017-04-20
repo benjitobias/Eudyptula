@@ -19,7 +19,7 @@ int do_work(int *my_int, int retval)
 	return z;
 }
 
-int my_init (void)
+int my_init(void)
 {
 	int x = 10;
 
