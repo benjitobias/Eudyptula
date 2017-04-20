@@ -1,0 +1,2989 @@
+From 554a68039d22093208ce973591370676871feb33 Mon Sep 17 00:00:00 2001
+From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+Date: Thu, 20 Apr 2017 18:38:50 +0300
+Subject: [PATCH 1/9] Fixed coding style
+
+---
+ 04/src/coding_style.c | 20 ++++++++------------
+ 04/src/hello.c        | 14 ++++----------
+ 2 files changed, 12 insertions(+), 22 deletions(-)
+
+diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+index 9fd8f59..e29d3b1 100644
+--- a/04/src/coding_style.c
++++ b/04/src/coding_style.c
+@@ -3,35 +3,31 @@
+ #include <asm/delay.h>
+ #include <linux/slab.h>
+ 
+-int do_work( int * my_int, int retval ) {
++int do_work(int *my_int, int retval)
++{
+ 	int x;
+-	int y=*my_int;
++	int y = *my_int;
+ 	int z;
+-	
+-	for(x=0;x< * my_int;++x) {
++
++	for (x = 0; x < *my_int; ++x)
+ 		udelay(10);
+-	}
+ 
+-	if (y < 10 )
+-		// That was a long sleep, tell userspace about it
++	if (y < 10)
+ 		printk("We slept a long time!");
+ 
+ 	z = x * y;
+-
+ 	return z;
+ }
+ 
+-int
+-my_init (void)
++int my_init(void)
+ {
+ 	int x = 10;
+ 
+ 	x = do_work(&x, x);
+-
+ 	return x;
+ }
+ 
+-void my_exit( void )
++void my_exit(void)
+ {
+ 	return;
+ }
+diff --git a/04/src/hello.c b/04/src/hello.c
+index 157c20a..9ea08ac 100644
+--- a/04/src/hello.c
++++ b/04/src/hello.c
+@@ -1,6 +1,6 @@
+-#include <linux/module.h> // included for all kernel modules
+-#include <linux/kernel.h> // included for KERN_DEBUG
+-#include <linux/init.h> // included for __init and __exit macros
++#include <linux/module.h>
++#include <linux/kernel.h>
++#include <linux/init.h>
+ 
+ MODULE_LICENSE("GPL");
+ MODULE_AUTHOR("BENJI");
+@@ -8,18 +8,12 @@ MODULE_DESCRIPTION("A simple Hello World module");
+ 
+ static int __init hello_init(void)
+ {
+-    /*
+-        Initialize
+-    */
+     printk(KERN_DEBUG "hello: Hello world!\n");
+-    return 0; // Non-zero return means that the module couldn't be loaded.
++    return 0;
+ }
+ 
+ static void __exit hello_cleanup(void)
+ {
+-    /*
+-        Unload
+-    */
+     printk(KERN_DEBUG "hello: Cleaning up module.\n");
+ }
+ 
+-- 
+2.7.4
+
+
+From 9bff00fc99b336810437c124f66b96a73665abff Mon Sep 17 00:00:00 2001
+From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+Date: Thu, 20 Apr 2017 18:39:56 +0300
+Subject: [PATCH 2/9] Created patch file
+
+---
+ 04/src/coding_style.patch | 95 +++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 95 insertions(+)
+ create mode 100644 04/src/coding_style.patch
+
+diff --git a/04/src/coding_style.patch b/04/src/coding_style.patch
+new file mode 100644
+index 0000000..3bcde0f
+--- /dev/null
++++ b/04/src/coding_style.patch
+@@ -0,0 +1,95 @@
++From 554a68039d22093208ce973591370676871feb33 Mon Sep 17 00:00:00 2001
++From: "benjitobias@gmail.com" <benjitobias@gmail.com>
++Date: Thu, 20 Apr 2017 18:38:50 +0300
++Subject: [PATCH] Fixed coding style
++
++---
++ 04/src/coding_style.c | 20 ++++++++------------
++ 04/src/hello.c        | 14 ++++----------
++ 2 files changed, 12 insertions(+), 22 deletions(-)
++
++diff --git a/04/src/coding_style.c b/04/src/coding_style.c
++index 9fd8f59..e29d3b1 100644
++--- a/04/src/coding_style.c
+++++ b/04/src/coding_style.c
++@@ -3,35 +3,31 @@
++ #include <asm/delay.h>
++ #include <linux/slab.h>
++
++-int do_work( int * my_int, int retval ) {
+++int do_work(int *my_int, int retval)
+++{
++ 	int x;
++-	int y=*my_int;
+++	int y = *my_int;
++ 	int z;
++-
++-	for(x=0;x< * my_int;++x) {
+++
+++	for(x = 0; x < *my_int; ++x)
++ 		udelay(10);
++-	}
++
++-	if (y < 10 )
++-		// That was a long sleep, tell userspace about it
+++	if (y < 10)
++ 		printk("We slept a long time!");
++
++ 	z = x * y;
++-
++ 	return z;
++ }
++
++-int
++-my_init (void)
+++int my_init (void)
++ {
++ 	int x = 10;
++
++ 	x = do_work(&x, x);
++-
++ 	return x;
++ }
++
++-void my_exit( void )
+++void my_exit(void)
++ {
++ 	return;
++ }
++diff --git a/04/src/hello.c b/04/src/hello.c
++index 157c20a..9ea08ac 100644
++--- a/04/src/hello.c
+++++ b/04/src/hello.c
++@@ -1,6 +1,6 @@
++-#include <linux/module.h> // included for all kernel modules
++-#include <linux/kernel.h> // included for KERN_DEBUG
++-#include <linux/init.h> // included for __init and __exit macros
+++#include <linux/module.h>
+++#include <linux/kernel.h>
+++#include <linux/init.h>
++
++ MODULE_LICENSE("GPL");
++ MODULE_AUTHOR("BENJI");
++@@ -8,18 +8,12 @@ MODULE_DESCRIPTION("A simple Hello World module");
++
++ static int __init hello_init(void)
++ {
++-    /*
++-        Initialize
++-    */
++     printk(KERN_DEBUG "hello: Hello world!\n");
++-    return 0; // Non-zero return means that the module couldn't be loaded.
+++    return 0;
++ }
++
++ static void __exit hello_cleanup(void)
++ {
++-    /*
++-        Unload
++-    */
++     printk(KERN_DEBUG "hello: Cleaning up module.\n");
++ }
++
++--
++2.7.4
++
+-- 
+2.7.4
+
+
+From 1da04e2c57c23371e3d48798f04f17239de688ba Mon Sep 17 00:00:00 2001
+From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+Date: Thu, 20 Apr 2017 18:47:57 +0300
+Subject: [PATCH 3/9] Fixed line endings
+
+---
+ 04/src/:q | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 04/src/:q
+
+diff --git a/04/src/:q b/04/src/:q
+new file mode 100644
+index 0000000..e69de29
+-- 
+2.7.4
+
+
+From 10c45828230973edfa22c39e08cda91f27d2b268 Mon Sep 17 00:00:00 2001
+From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+Date: Thu, 20 Apr 2017 18:51:32 +0300
+Subject: [PATCH 4/9] Fixed coding style
+
+---
+ 04/src/:q                 |  0
+ 04/src/coding_style.c     |  2 +-
+ 04/src/coding_style.patch | 95 -----------------------------------------------
+ 04/src/hello.c            |  6 +--
+ 4 files changed, 4 insertions(+), 99 deletions(-)
+ delete mode 100644 04/src/:q
+ delete mode 100644 04/src/coding_style.patch
+
+diff --git a/04/src/:q b/04/src/:q
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+index e29d3b1..8eb4207 100644
+--- a/04/src/coding_style.c
++++ b/04/src/coding_style.c
+@@ -19,7 +19,7 @@ int do_work(int *my_int, int retval)
+ 	return z;
+ }
+ 
+-int my_init (void)
++int my_init(void)
+ {
+ 	int x = 10;
+ 
+diff --git a/04/src/coding_style.patch b/04/src/coding_style.patch
+deleted file mode 100644
+index 3bcde0f..0000000
+--- a/04/src/coding_style.patch
++++ /dev/null
+@@ -1,95 +0,0 @@
+-From 554a68039d22093208ce973591370676871feb33 Mon Sep 17 00:00:00 2001
+-From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+-Date: Thu, 20 Apr 2017 18:38:50 +0300
+-Subject: [PATCH] Fixed coding style
+-
+----
+- 04/src/coding_style.c | 20 ++++++++------------
+- 04/src/hello.c        | 14 ++++----------
+- 2 files changed, 12 insertions(+), 22 deletions(-)
+-
+-diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+-index 9fd8f59..e29d3b1 100644
+---- a/04/src/coding_style.c
+-+++ b/04/src/coding_style.c
+-@@ -3,35 +3,31 @@
+- #include <asm/delay.h>
+- #include <linux/slab.h>
+- 
+--int do_work( int * my_int, int retval ) {
+-+int do_work(int *my_int, int retval)
+-+{
+- 	int x;
+--	int y=*my_int;
+-+	int y = *my_int;
+- 	int z;
+--	
+--	for(x=0;x< * my_int;++x) {
+-+
+-+	for(x = 0; x < *my_int; ++x)
+- 		udelay(10);
+--	}
+- 
+--	if (y < 10 )
+--		// That was a long sleep, tell userspace about it
+-+	if (y < 10)
+- 		printk("We slept a long time!");
+- 
+- 	z = x * y;
+--
+- 	return z;
+- }
+- 
+--int
+--my_init (void)
+-+int my_init (void)
+- {
+- 	int x = 10;
+- 
+- 	x = do_work(&x, x);
+--
+- 	return x;
+- }
+- 
+--void my_exit( void )
+-+void my_exit(void)
+- {
+- 	return;
+- }
+-diff --git a/04/src/hello.c b/04/src/hello.c
+-index 157c20a..9ea08ac 100644
+---- a/04/src/hello.c
+-+++ b/04/src/hello.c
+-@@ -1,6 +1,6 @@
+--#include <linux/module.h> // included for all kernel modules
+--#include <linux/kernel.h> // included for KERN_DEBUG
+--#include <linux/init.h> // included for __init and __exit macros
+-+#include <linux/module.h>
+-+#include <linux/kernel.h>
+-+#include <linux/init.h>
+- 
+- MODULE_LICENSE("GPL");
+- MODULE_AUTHOR("BENJI");
+-@@ -8,18 +8,12 @@ MODULE_DESCRIPTION("A simple Hello World module");
+- 
+- static int __init hello_init(void)
+- {
+--    /*
+--        Initialize
+--    */
+-     printk(KERN_DEBUG "hello: Hello world!\n");
+--    return 0; // Non-zero return means that the module couldn't be loaded.
+-+    return 0;
+- }
+- 
+- static void __exit hello_cleanup(void)
+- {
+--    /*
+--        Unload
+--    */
+-     printk(KERN_DEBUG "hello: Cleaning up module.\n");
+- }
+- 
+--- 
+-2.7.4
+-
+diff --git a/04/src/hello.c b/04/src/hello.c
+index 9ea08ac..2790459 100644
+--- a/04/src/hello.c
++++ b/04/src/hello.c
+@@ -8,13 +8,13 @@ MODULE_DESCRIPTION("A simple Hello World module");
+ 
+ static int __init hello_init(void)
+ {
+-    printk(KERN_DEBUG "hello: Hello world!\n");
+-    return 0;
++	printk(KERN_DEBUG "hello: Hello world!\n");
++	return 0;
+ }
+ 
+ static void __exit hello_cleanup(void)
+ {
+-    printk(KERN_DEBUG "hello: Cleaning up module.\n");
++	printk(KERN_DEBUG "hello: Cleaning up module.\n");
+ }
+ 
+ module_init(hello_init);
+-- 
+2.7.4
+
+
+From dd152268ffd5d1d273757ac4d5800f9402a070e6 Mon Sep 17 00:00:00 2001
+From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+Date: Thu, 20 Apr 2017 19:00:40 +0300
+Subject: [PATCH 5/9] Style
+
+---
+ 04/src/coding_style.c | 26 +++++++++++++-------------
+ 04/src/hello.c        |  6 +++---
+ 2 files changed, 16 insertions(+), 16 deletions(-)
+
+diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+index 8eb4207..6042f65 100644
+--- a/04/src/coding_style.c
++++ b/04/src/coding_style.c
+@@ -5,31 +5,31 @@
+ 
+ int do_work(int *my_int, int retval)
+ {
+-	int x;
+-	int y = *my_int;
+-	int z;
++    int x;
++    int y = *my_int;
++    int z;
+ 
+-	for(x = 0; x < *my_int; ++x)
+-		udelay(10);
++    for (x = 0; x < *my_int; ++x)
++	udelay(10);
+ 
+-	if (y < 10)
+-		printk("We slept a long time!");
++    if (y < 10)
++	printk("We slept a long time!");
+ 
+-	z = x * y;
+-	return z;
++    z = x * y;
++    return z;
+ }
+ 
+ int my_init(void)
+ {
+-	int x = 10;
++    int x = 10;
+ 
+-	x = do_work(&x, x);
+-	return x;
++    x = do_work(&x, x);
++    return x;
+ }
+ 
+ void my_exit(void)
+ {
+-	return;
++    return;
+ }
+ 
+ module_init(my_init);
+diff --git a/04/src/hello.c b/04/src/hello.c
+index 2790459..9ea08ac 100644
+--- a/04/src/hello.c
++++ b/04/src/hello.c
+@@ -8,13 +8,13 @@ MODULE_DESCRIPTION("A simple Hello World module");
+ 
+ static int __init hello_init(void)
+ {
+-        printk(KERN_DEBUG "hello: Hello world!\n");
+-        return 0;
++    printk(KERN_DEBUG "hello: Hello world!\n");
++    return 0;
+ }
+ 
+ static void __exit hello_cleanup(void)
+ {
+-        printk(KERN_DEBUG "hello: Cleaning up module.\n");
++    printk(KERN_DEBUG "hello: Cleaning up module.\n");
+ }
+ 
+ module_init(hello_init);
+-- 
+2.7.4
+
+
+From 94bccc85d8c508e26d756c2dc4d2ddf0902ea40f Mon Sep 17 00:00:00 2001
+From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+Date: Thu, 20 Apr 2017 19:07:04 +0300
+Subject: [PATCH 6/9] Style
+
+---
+ 04/src/coding_style.c     |  26 +--
+ 04/src/coding_style.patch | 467 ++++++++++++++++++++++++++++++++++++++++++++++
+ 04/src/hello.c            |   6 +-
+ 3 files changed, 483 insertions(+), 16 deletions(-)
+ create mode 100644 04/src/coding_style.patch
+
+diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+index 6042f65..8eb4207 100644
+--- a/04/src/coding_style.c
++++ b/04/src/coding_style.c
+@@ -5,31 +5,31 @@
+ 
+ int do_work(int *my_int, int retval)
+ {
+-    int x;
+-    int y = *my_int;
+-    int z;
++	int x;
++	int y = *my_int;
++	int z;
+ 
+-    for(x = 0; x < *my_int; ++x)
+-	udelay(10);
++	for (x = 0; x < *my_int; ++x)
++		udelay(10);
+ 
+-    if (y < 10)
+-	printk("We slept a long time!");
++	if (y < 10)
++		printk("We slept a long time!");
+ 
+-    z = x * y;
+-    return z;
++	z = x * y;
++	return z;
+ }
+ 
+ int my_init(void)
+ {
+-    int x = 10;
++	int x = 10;
+ 
+-    x = do_work(&x, x);
+-    return x;
++	x = do_work(&x, x);
++	return x;
+ }
+ 
+ void my_exit(void)
+ {
+-    return;
++	return;
+ }
+ 
+ module_init(my_init);
+diff --git a/04/src/coding_style.patch b/04/src/coding_style.patch
+new file mode 100644
+index 0000000..8f3314c
+--- /dev/null
++++ b/04/src/coding_style.patch
+@@ -0,0 +1,467 @@
++From 554a68039d22093208ce973591370676871feb33 Mon Sep 17 00:00:00 2001
++From: "benjitobias@gmail.com" <benjitobias@gmail.com>
++Date: Thu, 20 Apr 2017 18:38:50 +0300
++Subject: [PATCH 1/5] Fixed coding style
++
++---
++ 04/src/coding_style.c | 20 ++++++++------------
++ 04/src/hello.c        | 14 ++++----------
++ 2 files changed, 12 insertions(+), 22 deletions(-)
++
++diff --git a/04/src/coding_style.c b/04/src/coding_style.c
++index 9fd8f59..e29d3b1 100644
++--- a/04/src/coding_style.c
+++++ b/04/src/coding_style.c
++@@ -3,35 +3,31 @@
++ #include <asm/delay.h>
++ #include <linux/slab.h>
++
++-int do_work( int * my_int, int retval ) {
+++int do_work(int *my_int, int retval)
+++{
++ 	int x;
++-	int y=*my_int;
+++	int y = *my_int;
++ 	int z;
++-
++-	for(x=0;x< * my_int;++x) {
+++
+++	for (x = 0; x < *my_int; ++x)
++ 		udelay(10);
++-	}
++
++-	if (y < 10 )
++-		// That was a long sleep, tell userspace about it
+++	if (y < 10)
++ 		printk("We slept a long time!");
++
++ 	z = x * y;
++-
++ 	return z;
++ }
++
++-int
++-my_init (void)
+++int my_init(void)
++ {
++ 	int x = 10;
++
++ 	x = do_work(&x, x);
++-
++ 	return x;
++ }
++
++-void my_exit( void )
+++void my_exit(void)
++ {
++ 	return;
++ }
++diff --git a/04/src/hello.c b/04/src/hello.c
++index 157c20a..9ea08ac 100644
++--- a/04/src/hello.c
+++++ b/04/src/hello.c
++@@ -1,6 +1,6 @@
++-#include <linux/module.h> // included for all kernel modules
++-#include <linux/kernel.h> // included for KERN_DEBUG
++-#include <linux/init.h> // included for __init and __exit macros
+++#include <linux/module.h>
+++#include <linux/kernel.h>
+++#include <linux/init.h>
++
++ MODULE_LICENSE("GPL");
++ MODULE_AUTHOR("BENJI");
++@@ -8,18 +8,12 @@ MODULE_DESCRIPTION("A simple Hello World module");
++
++ static int __init hello_init(void)
++ {
++-    /*
++-        Initialize
++-    */
++     printk(KERN_DEBUG "hello: Hello world!\n");
++-    return 0; // Non-zero return means that the module couldn't be loaded.
+++    return 0;
++ }
++
++ static void __exit hello_cleanup(void)
++ {
++-    /*
++-        Unload
++-    */
++     printk(KERN_DEBUG "hello: Cleaning up module.\n");
++ }
++
++--
++2.7.4
++
++
++From 9bff00fc99b336810437c124f66b96a73665abff Mon Sep 17 00:00:00 2001
++From: "benjitobias@gmail.com" <benjitobias@gmail.com>
++Date: Thu, 20 Apr 2017 18:39:56 +0300
++Subject: [PATCH 2/5] Created patch file
++
++---
++ 04/src/coding_style.patch | 95 +++++++++++++++++++++++++++++++++++++++++++++++
++ 1 file changed, 95 insertions(+)
++ create mode 100644 04/src/coding_style.patch
++
++diff --git a/04/src/coding_style.patch b/04/src/coding_style.patch
++new file mode 100644
++index 0000000..3bcde0f
++--- /dev/null
+++++ b/04/src/coding_style.patch
++@@ -0,0 +1,95 @@
+++From 554a68039d22093208ce973591370676871feb33 Mon Sep 17 00:00:00 2001
+++From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+++Date: Thu, 20 Apr 2017 18:38:50 +0300
+++Subject: [PATCH] Fixed coding style
+++
+++---
+++ 04/src/coding_style.c | 20 ++++++++------------
+++ 04/src/hello.c        | 14 ++++----------
+++ 2 files changed, 12 insertions(+), 22 deletions(-)
+++
+++diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+++index 9fd8f59..e29d3b1 100644
+++--- a/04/src/coding_style.c
++++++ b/04/src/coding_style.c
+++@@ -3,35 +3,31 @@
+++ #include <asm/delay.h>
+++ #include <linux/slab.h>
+++
+++-int do_work( int * my_int, int retval ) {
++++int do_work(int *my_int, int retval)
++++{
+++ 	int x;
+++-	int y=*my_int;
++++	int y = *my_int;
+++ 	int z;
+++-
+++-	for(x=0;x< * my_int;++x) {
++++
++++	for(x = 0; x < *my_int; ++x)
+++ 		udelay(10);
+++-	}
+++
+++-	if (y < 10 )
+++-		// That was a long sleep, tell userspace about it
++++	if (y < 10)
+++ 		printk("We slept a long time!");
+++
+++ 	z = x * y;
+++-
+++ 	return z;
+++ }
+++
+++-int
+++-my_init (void)
++++int my_init (void)
+++ {
+++ 	int x = 10;
+++
+++ 	x = do_work(&x, x);
+++-
+++ 	return x;
+++ }
+++
+++-void my_exit( void )
++++void my_exit(void)
+++ {
+++ 	return;
+++ }
+++diff --git a/04/src/hello.c b/04/src/hello.c
+++index 157c20a..9ea08ac 100644
+++--- a/04/src/hello.c
++++++ b/04/src/hello.c
+++@@ -1,6 +1,6 @@
+++-#include <linux/module.h> // included for all kernel modules
+++-#include <linux/kernel.h> // included for KERN_DEBUG
+++-#include <linux/init.h> // included for __init and __exit macros
++++#include <linux/module.h>
++++#include <linux/kernel.h>
++++#include <linux/init.h>
+++
+++ MODULE_LICENSE("GPL");
+++ MODULE_AUTHOR("BENJI");
+++@@ -8,18 +8,12 @@ MODULE_DESCRIPTION("A simple Hello World module");
+++
+++ static int __init hello_init(void)
+++ {
+++-    /*
+++-        Initialize
+++-    */
+++     printk(KERN_DEBUG "hello: Hello world!\n");
+++-    return 0; // Non-zero return means that the module couldn't be loaded.
++++    return 0;
+++ }
+++
+++ static void __exit hello_cleanup(void)
+++ {
+++-    /*
+++-        Unload
+++-    */
+++     printk(KERN_DEBUG "hello: Cleaning up module.\n");
+++ }
+++
+++--
+++2.7.4
+++
++--
++2.7.4
++
++
++From 1da04e2c57c23371e3d48798f04f17239de688ba Mon Sep 17 00:00:00 2001
++From: "benjitobias@gmail.com" <benjitobias@gmail.com>
++Date: Thu, 20 Apr 2017 18:47:57 +0300
++Subject: [PATCH 3/5] Fixed line endings
++
++---
++ 04/src/:q | 0
++ 1 file changed, 0 insertions(+), 0 deletions(-)
++ create mode 100644 04/src/:q
++
++diff --git a/04/src/:q b/04/src/:q
++new file mode 100644
++index 0000000..e69de29
++--
++2.7.4
++
++
++From 10c45828230973edfa22c39e08cda91f27d2b268 Mon Sep 17 00:00:00 2001
++From: "benjitobias@gmail.com" <benjitobias@gmail.com>
++Date: Thu, 20 Apr 2017 18:51:32 +0300
++Subject: [PATCH 4/5] Fixed coding style
++
++---
++ 04/src/:q                 |  0
++ 04/src/coding_style.c     |  2 +-
++ 04/src/coding_style.patch | 95 -----------------------------------------------
++ 04/src/hello.c            |  6 +--
++ 4 files changed, 4 insertions(+), 99 deletions(-)
++ delete mode 100644 04/src/:q
++ delete mode 100644 04/src/coding_style.patch
++
++diff --git a/04/src/:q b/04/src/:q
++deleted file mode 100644
++index e69de29..0000000
++diff --git a/04/src/coding_style.c b/04/src/coding_style.c
++index e29d3b1..8eb4207 100644
++--- a/04/src/coding_style.c
+++++ b/04/src/coding_style.c
++@@ -19,7 +19,7 @@ int do_work(int *my_int, int retval)
++ 	return z;
++ }
++
++-int my_init (void)
+++int my_init(void)
++ {
++ 	int x = 10;
++
++diff --git a/04/src/coding_style.patch b/04/src/coding_style.patch
++deleted file mode 100644
++index 3bcde0f..0000000
++--- a/04/src/coding_style.patch
+++++ /dev/null
++@@ -1,95 +0,0 @@
++-From 554a68039d22093208ce973591370676871feb33 Mon Sep 17 00:00:00 2001
++-From: "benjitobias@gmail.com" <benjitobias@gmail.com>
++-Date: Thu, 20 Apr 2017 18:38:50 +0300
++-Subject: [PATCH] Fixed coding style
++-
++----
++- 04/src/coding_style.c | 20 ++++++++------------
++- 04/src/hello.c        | 14 ++++----------
++- 2 files changed, 12 insertions(+), 22 deletions(-)
++-
++-diff --git a/04/src/coding_style.c b/04/src/coding_style.c
++-index 9fd8f59..e29d3b1 100644
++---- a/04/src/coding_style.c
++-+++ b/04/src/coding_style.c
++-@@ -3,35 +3,31 @@
++- #include <asm/delay.h>
++- #include <linux/slab.h>
++-
++--int do_work( int * my_int, int retval ) {
++-+int do_work(int *my_int, int retval)
++-+{
++- 	int x;
++--	int y=*my_int;
++-+	int y = *my_int;
++- 	int z;
++--
++--	for(x=0;x< * my_int;++x) {
++-+
++-+	for(x = 0; x < *my_int; ++x)
++- 		udelay(10);
++--	}
++-
++--	if (y < 10 )
++--		// That was a long sleep, tell userspace about it
++-+	if (y < 10)
++- 		printk("We slept a long time!");
++-
++- 	z = x * y;
++--
++- 	return z;
++- }
++-
++--int
++--my_init (void)
++-+int my_init (void)
++- {
++- 	int x = 10;
++-
++- 	x = do_work(&x, x);
++--
++- 	return x;
++- }
++-
++--void my_exit( void )
++-+void my_exit(void)
++- {
++- 	return;
++- }
++-diff --git a/04/src/hello.c b/04/src/hello.c
++-index 157c20a..9ea08ac 100644
++---- a/04/src/hello.c
++-+++ b/04/src/hello.c
++-@@ -1,6 +1,6 @@
++--#include <linux/module.h> // included for all kernel modules
++--#include <linux/kernel.h> // included for KERN_DEBUG
++--#include <linux/init.h> // included for __init and __exit macros
++-+#include <linux/module.h>
++-+#include <linux/kernel.h>
++-+#include <linux/init.h>
++-
++- MODULE_LICENSE("GPL");
++- MODULE_AUTHOR("BENJI");
++-@@ -8,18 +8,12 @@ MODULE_DESCRIPTION("A simple Hello World module");
++-
++- static int __init hello_init(void)
++- {
++--    /*
++--        Initialize
++--    */
++-     printk(KERN_DEBUG "hello: Hello world!\n");
++--    return 0; // Non-zero return means that the module couldn't be loaded.
++-+    return 0;
++- }
++-
++- static void __exit hello_cleanup(void)
++- {
++--    /*
++--        Unload
++--    */
++-     printk(KERN_DEBUG "hello: Cleaning up module.\n");
++- }
++-
++---
++-2.7.4
++-
++diff --git a/04/src/hello.c b/04/src/hello.c
++index 9ea08ac..2790459 100644
++--- a/04/src/hello.c
+++++ b/04/src/hello.c
++@@ -8,13 +8,13 @@ MODULE_DESCRIPTION("A simple Hello World module");
++
++ static int __init hello_init(void)
++ {
++-    printk(KERN_DEBUG "hello: Hello world!\n");
++-    return 0;
+++	printk(KERN_DEBUG "hello: Hello world!\n");
+++	return 0;
++ }
++
++ static void __exit hello_cleanup(void)
++ {
++-    printk(KERN_DEBUG "hello: Cleaning up module.\n");
+++	printk(KERN_DEBUG "hello: Cleaning up module.\n");
++ }
++
++ module_init(hello_init);
++--
++2.7.4
++
++
++From dd152268ffd5d1d273757ac4d5800f9402a070e6 Mon Sep 17 00:00:00 2001
++From: "benjitobias@gmail.com" <benjitobias@gmail.com>
++Date: Thu, 20 Apr 2017 19:00:40 +0300
++Subject: [PATCH 5/5] Style
++
++---
++ 04/src/coding_style.c | 26 +++++++++++++-------------
++ 04/src/hello.c        |  6 +++---
++ 2 files changed, 16 insertions(+), 16 deletions(-)
++
++diff --git a/04/src/coding_style.c b/04/src/coding_style.c
++index 8eb4207..6042f65 100644
++--- a/04/src/coding_style.c
+++++ b/04/src/coding_style.c
++@@ -5,31 +5,31 @@
++
++ int do_work(int *my_int, int retval)
++ {
++-	int x;
++-	int y = *my_int;
++-	int z;
+++    int x;
+++    int y = *my_int;
+++    int z;
++
++-	for(x = 0; x < *my_int; ++x)
++-		udelay(10);
+++    for (x = 0; x < *my_int; ++x)
+++	udelay(10);
++
++-	if (y < 10)
++-		printk("We slept a long time!");
+++    if (y < 10)
+++	printk("We slept a long time!");
++
++-	z = x * y;
++-	return z;
+++    z = x * y;
+++    return z;
++ }
++
++ int my_init(void)
++ {
++-	int x = 10;
+++    int x = 10;
++
++-	x = do_work(&x, x);
++-	return x;
+++    x = do_work(&x, x);
+++    return x;
++ }
++
++ void my_exit(void)
++ {
++-	return;
+++    return;
++ }
++
++ module_init(my_init);
++diff --git a/04/src/hello.c b/04/src/hello.c
++index 2790459..9ea08ac 100644
++--- a/04/src/hello.c
+++++ b/04/src/hello.c
++@@ -8,13 +8,13 @@ MODULE_DESCRIPTION("A simple Hello World module");
++
++ static int __init hello_init(void)
++ {
++-        printk(KERN_DEBUG "hello: Hello world!\n");
++-        return 0;
+++    printk(KERN_DEBUG "hello: Hello world!\n");
+++    return 0;
++ }
++
++ static void __exit hello_cleanup(void)
++ {
++-        printk(KERN_DEBUG "hello: Cleaning up module.\n");
+++    printk(KERN_DEBUG "hello: Cleaning up module.\n");
++ }
++
++ module_init(hello_init);
++--
++2.7.4
++
+diff --git a/04/src/hello.c b/04/src/hello.c
+index 9ea08ac..77981af 100644
+--- a/04/src/hello.c
++++ b/04/src/hello.c
+@@ -8,13 +8,13 @@ MODULE_DESCRIPTION("A simple Hello World module");
+ 
+ static int __init hello_init(void)
+ {
+-    printk(KERN_DEBUG "hello: Hello world!\n");
+-    return 0;
++	printk(KERN_DEBUG "hello: Hello world!\n");
++	return 0;
+ }
+ 
+ static void __exit hello_cleanup(void)
+ {
+-    printk(KERN_DEBUG "hello: Cleaning up module.\n");
++	printk(KERN_DEBUG "hello: Cleaning up module.\n");
+ }
+ 
+ module_init(hello_init);
+-- 
+2.7.4
+
+
+From 8085539610d20b41e77f5ea4a1f4caab2f2ecfe5 Mon Sep 17 00:00:00 2001
+From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+Date: Thu, 20 Apr 2017 19:08:41 +0300
+Subject: [PATCH 7/9] Style
+
+---
+ 04/src/coding_style.patch | 715 +++++++++++++++++++++++++++++++++++++++++-----
+ 04/src/hello.c            |   2 +-
+ 2 files changed, 638 insertions(+), 79 deletions(-)
+
+diff --git a/04/src/coding_style.patch b/04/src/coding_style.patch
+index 8f3314c..d8be129 100644
+--- a/04/src/coding_style.patch
++++ b/04/src/coding_style.patch
+@@ -1,7 +1,7 @@
+ From 554a68039d22093208ce973591370676871feb33 Mon Sep 17 00:00:00 2001
+ From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+ Date: Thu, 20 Apr 2017 18:38:50 +0300
+-Subject: [PATCH 1/5] Fixed coding style
++Subject: [PATCH 1/6] Fixed coding style
+ 
+ ---
+  04/src/coding_style.c | 20 ++++++++------------
+@@ -17,22 +17,22 @@ index 9fd8f59..e29d3b1 100644
+  #include <linux/slab.h>
+  
+ -int do_work( int * my_int, int retval ) {
+-+int do_work(int *my_int, int retval)
+-+{
+++int do_work(int *my_int, int retval)
+++{
+  	int x;
+ -	int y=*my_int;
+-+	int y = *my_int;
+++	int y = *my_int;
+  	int z;
+ -	
+ -	for(x=0;x< * my_int;++x) {
+-+
+-+	for (x = 0; x < *my_int; ++x)
+++
+++	for(x = 0; x < *my_int; ++x)
+  		udelay(10);
+ -	}
+  
+ -	if (y < 10 )
+ -		// That was a long sleep, tell userspace about it
+-+	if (y < 10)
+++	if (y < 10)
+  		printk("We slept a long time!");
+  
+  	z = x * y;
+@@ -42,7 +42,7 @@ index 9fd8f59..e29d3b1 100644
+  
+ -int
+ -my_init (void)
+-+int my_init(void)
+++int my_init (void)
+  {
+  	int x = 10;
+  
+@@ -52,7 +52,7 @@ index 9fd8f59..e29d3b1 100644
+  }
+  
+ -void my_exit( void )
+-+void my_exit(void)
+++void my_exit(void)
+  {
+  	return;
+  }
+@@ -97,7 +97,7 @@ index 157c20a..9ea08ac 100644
+ From 9bff00fc99b336810437c124f66b96a73665abff Mon Sep 17 00:00:00 2001
+ From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+ Date: Thu, 20 Apr 2017 18:39:56 +0300
+-Subject: [PATCH 2/5] Created patch file
++Subject: [PATCH 2/6] Created patch file
+ 
+ ---
+  04/src/coding_style.patch | 95 +++++++++++++++++++++++++++++++++++++++++++++++
+@@ -125,49 +125,49 @@ index 0000000..3bcde0f
+ +--- a/04/src/coding_style.c
+ ++++ b/04/src/coding_style.c
+ +@@ -3,35 +3,31 @@
+-+ #include <asm/delay.h>
+-+ #include <linux/slab.h>
+-+
+-+-int do_work( int * my_int, int retval ) {
+-++int do_work(int *my_int, int retval)
+-++{
+-+ 	int x;
+-+-	int y=*my_int;
+-++	int y = *my_int;
+-+ 	int z;
+-+-
+-+-	for(x=0;x< * my_int;++x) {
+-++
+-++	for(x = 0; x < *my_int; ++x)
+-+ 		udelay(10);
+-+-	}
+-+
+-+-	if (y < 10 )
+-+-		// That was a long sleep, tell userspace about it
+-++	if (y < 10)
+-+ 		printk("We slept a long time!");
+-+
+-+ 	z = x * y;
+-+-
+-+ 	return z;
+-+ }
+-+
+-+-int
+-+-my_init (void)
+-++int my_init (void)
+-+ {
+-+ 	int x = 10;
+-+
+-+ 	x = do_work(&x, x);
+-+-
+-+ 	return x;
+-+ }
+-+
+-+-void my_exit( void )
+-++void my_exit(void)
+-+ {
+-+ 	return;
+-+ }
+++ #include <asm/delay.h>
+++ #include <linux/slab.h>
+++
+++-int do_work( int * my_int, int retval ) {
++++int do_work(int *my_int, int retval)
++++{
+++ 	int x;
+++-	int y=*my_int;
++++	int y = *my_int;
+++ 	int z;
+++-
+++-	for(x=0;x< * my_int;++x) {
++++
++++	for(x = 0; x < *my_int; ++x)
+++ 		udelay(10);
+++-	}
+++
+++-	if (y < 10 )
+++-		// That was a long sleep, tell userspace about it
++++	if (y < 10)
+++ 		printk("We slept a long time!");
+++
+++ 	z = x * y;
+++-
+++ 	return z;
+++ }
+++
+++-int
+++-my_init (void)
++++int my_init (void)
+++ {
+++ 	int x = 10;
+++
+++ 	x = do_work(&x, x);
+++-
+++ 	return x;
+++ }
+++
+++-void my_exit( void )
++++void my_exit(void)
+++ {
+++ 	return;
+++ }
+ +diff --git a/04/src/hello.c b/04/src/hello.c
+ +index 157c20a..9ea08ac 100644
+ +--- a/04/src/hello.c
+@@ -179,11 +179,11 @@ index 0000000..3bcde0f
+ ++#include <linux/module.h>
+ ++#include <linux/kernel.h>
+ ++#include <linux/init.h>
+-+
+++
+ + MODULE_LICENSE("GPL");
+ + MODULE_AUTHOR("BENJI");
+ +@@ -8,18 +8,12 @@ MODULE_DESCRIPTION("A simple Hello World module");
+-+
+++
+ + static int __init hello_init(void)
+ + {
+ +-    /*
+@@ -193,7 +193,7 @@ index 0000000..3bcde0f
+ +-    return 0; // Non-zero return means that the module couldn't be loaded.
+ ++    return 0;
+ + }
+-+
+++
+ + static void __exit hello_cleanup(void)
+ + {
+ +-    /*
+@@ -201,8 +201,8 @@ index 0000000..3bcde0f
+ +-    */
+ +     printk(KERN_DEBUG "hello: Cleaning up module.\n");
+ + }
+-+
+-+--
+++
+++--
+ +2.7.4
+ +
+ -- 
+@@ -212,7 +212,7 @@ index 0000000..3bcde0f
+ From 1da04e2c57c23371e3d48798f04f17239de688ba Mon Sep 17 00:00:00 2001
+ From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+ Date: Thu, 20 Apr 2017 18:47:57 +0300
+-Subject: [PATCH 3/5] Fixed line endings
++Subject: [PATCH 3/6] Fixed line endings
+ 
+ ---
+  04/src/:q | 0
+@@ -229,7 +229,7 @@ index 0000000..e69de29
+ From 10c45828230973edfa22c39e08cda91f27d2b268 Mon Sep 17 00:00:00 2001
+ From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+ Date: Thu, 20 Apr 2017 18:51:32 +0300
+-Subject: [PATCH 4/5] Fixed coding style
++Subject: [PATCH 4/6] Fixed coding style
+ 
+ ---
+  04/src/:q                 |  0
+@@ -252,7 +252,7 @@ index e29d3b1..8eb4207 100644
+  }
+  
+ -int my_init (void)
+-+int my_init(void)
+++int my_init(void)
+  {
+  	int x = 10;
+  
+@@ -367,14 +367,14 @@ index 9ea08ac..2790459 100644
+  {
+ -    printk(KERN_DEBUG "hello: Hello world!\n");
+ -    return 0;
+-+	printk(KERN_DEBUG "hello: Hello world!\n");
+-+	return 0;
+++        printk(KERN_DEBUG "hello: Hello world!\n");
+++        return 0;
+  }
+  
+  static void __exit hello_cleanup(void)
+  {
+ -    printk(KERN_DEBUG "hello: Cleaning up module.\n");
+-+	printk(KERN_DEBUG "hello: Cleaning up module.\n");
+++        printk(KERN_DEBUG "hello: Cleaning up module.\n");
+  }
+  
+  module_init(hello_init);
+@@ -385,7 +385,7 @@ index 9ea08ac..2790459 100644
+ From dd152268ffd5d1d273757ac4d5800f9402a070e6 Mon Sep 17 00:00:00 2001
+ From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+ Date: Thu, 20 Apr 2017 19:00:40 +0300
+-Subject: [PATCH 5/5] Style
++Subject: [PATCH 5/6] Style
+ 
+ ---
+  04/src/coding_style.c | 26 +++++++++++++-------------
+@@ -403,41 +403,41 @@ index 8eb4207..6042f65 100644
+ -	int x;
+ -	int y = *my_int;
+ -	int z;
+-+    int x;
+-+    int y = *my_int;
+-+    int z;
+++    int x;
+++    int y = *my_int;
+++    int z;
+  
+ -	for(x = 0; x < *my_int; ++x)
+ -		udelay(10);
+-+    for (x = 0; x < *my_int; ++x)
+-+	udelay(10);
+++    for(x = 0; x < *my_int; ++x)
+++	udelay(10);
+  
+ -	if (y < 10)
+ -		printk("We slept a long time!");
+-+    if (y < 10)
+-+	printk("We slept a long time!");
+++    if (y < 10)
+++	printk("We slept a long time!");
+  
+ -	z = x * y;
+ -	return z;
+-+    z = x * y;
+-+    return z;
+++    z = x * y;
+++    return z;
+  }
+  
+  int my_init(void)
+  {
+ -	int x = 10;
+-+    int x = 10;
+++    int x = 10;
+  
+ -	x = do_work(&x, x);
+ -	return x;
+-+    x = do_work(&x, x);
+-+    return x;
+++    x = do_work(&x, x);
+++    return x;
+  }
+  
+  void my_exit(void)
+  {
+ -	return;
+-+    return;
+++    return;
+  }
+  
+  module_init(my_init);
+@@ -465,3 +465,562 @@ index 2790459..9ea08ac 100644
+ -- 
+ 2.7.4
+ 
++
++From 94bccc85d8c508e26d756c2dc4d2ddf0902ea40f Mon Sep 17 00:00:00 2001
++From: "benjitobias@gmail.com" <benjitobias@gmail.com>
++Date: Thu, 20 Apr 2017 19:07:04 +0300
++Subject: [PATCH 6/6] Style
++
++---
++ 04/src/coding_style.c     |  26 +--
++ 04/src/coding_style.patch | 467 ++++++++++++++++++++++++++++++++++++++++++++++
++ 04/src/hello.c            |   6 +-
++ 3 files changed, 483 insertions(+), 16 deletions(-)
++ create mode 100644 04/src/coding_style.patch
++
++diff --git a/04/src/coding_style.c b/04/src/coding_style.c
++index 6042f65..8eb4207 100644
++--- a/04/src/coding_style.c
+++++ b/04/src/coding_style.c
++@@ -5,31 +5,31 @@
++
++ int do_work(int *my_int, int retval)
++ {
++-    int x;
++-    int y = *my_int;
++-    int z;
+++	int x;
+++	int y = *my_int;
+++	int z;
++
++-    for(x = 0; x < *my_int; ++x)
++-	udelay(10);
+++	for(x = 0; x < *my_int; ++x)
+++		udelay(10);
++
++-    if (y < 10)
++-	printk("We slept a long time!");
+++	if (y < 10)
+++		printk("We slept a long time!");
++
++-    z = x * y;
++-    return z;
+++	z = x * y;
+++	return z;
++ }
++
++ int my_init(void)
++ {
++-    int x = 10;
+++	int x = 10;
++
++-    x = do_work(&x, x);
++-    return x;
+++	x = do_work(&x, x);
+++	return x;
++ }
++
++ void my_exit(void)
++ {
++-    return;
+++	return;
++ }
++
++ module_init(my_init);
++diff --git a/04/src/coding_style.patch b/04/src/coding_style.patch
++new file mode 100644
++index 0000000..8f3314c
++--- /dev/null
+++++ b/04/src/coding_style.patch
++@@ -0,0 +1,467 @@
+++From 554a68039d22093208ce973591370676871feb33 Mon Sep 17 00:00:00 2001
+++From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+++Date: Thu, 20 Apr 2017 18:38:50 +0300
+++Subject: [PATCH 1/5] Fixed coding style
+++
+++---
+++ 04/src/coding_style.c | 20 ++++++++------------
+++ 04/src/hello.c        | 14 ++++----------
+++ 2 files changed, 12 insertions(+), 22 deletions(-)
+++
+++diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+++index 9fd8f59..e29d3b1 100644
+++--- a/04/src/coding_style.c
++++++ b/04/src/coding_style.c
+++@@ -3,35 +3,31 @@
+++ #include <asm/delay.h>
+++ #include <linux/slab.h>
+++
+++-int do_work( int * my_int, int retval ) {
++++int do_work(int *my_int, int retval)
++++{
+++ 	int x;
+++-	int y=*my_int;
++++	int y = *my_int;
+++ 	int z;
+++-
+++-	for(x=0;x< * my_int;++x) {
++++
++++	for (x = 0; x < *my_int; ++x)
+++ 		udelay(10);
+++-	}
+++
+++-	if (y < 10 )
+++-		// That was a long sleep, tell userspace about it
++++	if (y < 10)
+++ 		printk("We slept a long time!");
+++
+++ 	z = x * y;
+++-
+++ 	return z;
+++ }
+++
+++-int
+++-my_init (void)
++++int my_init(void)
+++ {
+++ 	int x = 10;
+++
+++ 	x = do_work(&x, x);
+++-
+++ 	return x;
+++ }
+++
+++-void my_exit( void )
++++void my_exit(void)
+++ {
+++ 	return;
+++ }
+++diff --git a/04/src/hello.c b/04/src/hello.c
+++index 157c20a..9ea08ac 100644
+++--- a/04/src/hello.c
++++++ b/04/src/hello.c
+++@@ -1,6 +1,6 @@
+++-#include <linux/module.h> // included for all kernel modules
+++-#include <linux/kernel.h> // included for KERN_DEBUG
+++-#include <linux/init.h> // included for __init and __exit macros
++++#include <linux/module.h>
++++#include <linux/kernel.h>
++++#include <linux/init.h>
+++
+++ MODULE_LICENSE("GPL");
+++ MODULE_AUTHOR("BENJI");
+++@@ -8,18 +8,12 @@ MODULE_DESCRIPTION("A simple Hello World module");
+++
+++ static int __init hello_init(void)
+++ {
+++-    /*
+++-        Initialize
+++-    */
+++     printk(KERN_DEBUG "hello: Hello world!\n");
+++-    return 0; // Non-zero return means that the module couldn't be loaded.
++++    return 0;
+++ }
+++
+++ static void __exit hello_cleanup(void)
+++ {
+++-    /*
+++-        Unload
+++-    */
+++     printk(KERN_DEBUG "hello: Cleaning up module.\n");
+++ }
+++
+++--
+++2.7.4
+++
+++
+++From 9bff00fc99b336810437c124f66b96a73665abff Mon Sep 17 00:00:00 2001
+++From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+++Date: Thu, 20 Apr 2017 18:39:56 +0300
+++Subject: [PATCH 2/5] Created patch file
+++
+++---
+++ 04/src/coding_style.patch | 95 +++++++++++++++++++++++++++++++++++++++++++++++
+++ 1 file changed, 95 insertions(+)
+++ create mode 100644 04/src/coding_style.patch
+++
+++diff --git a/04/src/coding_style.patch b/04/src/coding_style.patch
+++new file mode 100644
+++index 0000000..3bcde0f
+++--- /dev/null
++++++ b/04/src/coding_style.patch
+++@@ -0,0 +1,95 @@
++++From 554a68039d22093208ce973591370676871feb33 Mon Sep 17 00:00:00 2001
++++From: "benjitobias@gmail.com" <benjitobias@gmail.com>
++++Date: Thu, 20 Apr 2017 18:38:50 +0300
++++Subject: [PATCH] Fixed coding style
++++
++++---
++++ 04/src/coding_style.c | 20 ++++++++------------
++++ 04/src/hello.c        | 14 ++++----------
++++ 2 files changed, 12 insertions(+), 22 deletions(-)
++++
++++diff --git a/04/src/coding_style.c b/04/src/coding_style.c
++++index 9fd8f59..e29d3b1 100644
++++--- a/04/src/coding_style.c
+++++++ b/04/src/coding_style.c
++++@@ -3,35 +3,31 @@
++++ #include <asm/delay.h>
++++ #include <linux/slab.h>
++++
++++-int do_work( int * my_int, int retval ) {
+++++int do_work(int *my_int, int retval)
+++++{
++++ 	int x;
++++-	int y=*my_int;
+++++	int y = *my_int;
++++ 	int z;
++++-
++++-	for(x=0;x< * my_int;++x) {
+++++
+++++	for(x = 0; x < *my_int; ++x)
++++ 		udelay(10);
++++-	}
++++
++++-	if (y < 10 )
++++-		// That was a long sleep, tell userspace about it
+++++	if (y < 10)
++++ 		printk("We slept a long time!");
++++
++++ 	z = x * y;
++++-
++++ 	return z;
++++ }
++++
++++-int
++++-my_init (void)
+++++int my_init (void)
++++ {
++++ 	int x = 10;
++++
++++ 	x = do_work(&x, x);
++++-
++++ 	return x;
++++ }
++++
++++-void my_exit( void )
+++++void my_exit(void)
++++ {
++++ 	return;
++++ }
++++diff --git a/04/src/hello.c b/04/src/hello.c
++++index 157c20a..9ea08ac 100644
++++--- a/04/src/hello.c
+++++++ b/04/src/hello.c
++++@@ -1,6 +1,6 @@
++++-#include <linux/module.h> // included for all kernel modules
++++-#include <linux/kernel.h> // included for KERN_DEBUG
++++-#include <linux/init.h> // included for __init and __exit macros
+++++#include <linux/module.h>
+++++#include <linux/kernel.h>
+++++#include <linux/init.h>
++++
++++ MODULE_LICENSE("GPL");
++++ MODULE_AUTHOR("BENJI");
++++@@ -8,18 +8,12 @@ MODULE_DESCRIPTION("A simple Hello World module");
++++
++++ static int __init hello_init(void)
++++ {
++++-    /*
++++-        Initialize
++++-    */
++++     printk(KERN_DEBUG "hello: Hello world!\n");
++++-    return 0; // Non-zero return means that the module couldn't be loaded.
+++++    return 0;
++++ }
++++
++++ static void __exit hello_cleanup(void)
++++ {
++++-    /*
++++-        Unload
++++-    */
++++     printk(KERN_DEBUG "hello: Cleaning up module.\n");
++++ }
++++
++++--
++++2.7.4
++++
+++--
+++2.7.4
+++
+++
+++From 1da04e2c57c23371e3d48798f04f17239de688ba Mon Sep 17 00:00:00 2001
+++From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+++Date: Thu, 20 Apr 2017 18:47:57 +0300
+++Subject: [PATCH 3/5] Fixed line endings
+++
+++---
+++ 04/src/:q | 0
+++ 1 file changed, 0 insertions(+), 0 deletions(-)
+++ create mode 100644 04/src/:q
+++
+++diff --git a/04/src/:q b/04/src/:q
+++new file mode 100644
+++index 0000000..e69de29
+++--
+++2.7.4
+++
+++
+++From 10c45828230973edfa22c39e08cda91f27d2b268 Mon Sep 17 00:00:00 2001
+++From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+++Date: Thu, 20 Apr 2017 18:51:32 +0300
+++Subject: [PATCH 4/5] Fixed coding style
+++
+++---
+++ 04/src/:q                 |  0
+++ 04/src/coding_style.c     |  2 +-
+++ 04/src/coding_style.patch | 95 -----------------------------------------------
+++ 04/src/hello.c            |  6 +--
+++ 4 files changed, 4 insertions(+), 99 deletions(-)
+++ delete mode 100644 04/src/:q
+++ delete mode 100644 04/src/coding_style.patch
+++
+++diff --git a/04/src/:q b/04/src/:q
+++deleted file mode 100644
+++index e69de29..0000000
+++diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+++index e29d3b1..8eb4207 100644
+++--- a/04/src/coding_style.c
++++++ b/04/src/coding_style.c
+++@@ -19,7 +19,7 @@ int do_work(int *my_int, int retval)
+++ 	return z;
+++ }
+++
+++-int my_init (void)
++++int my_init(void)
+++ {
+++ 	int x = 10;
+++
+++diff --git a/04/src/coding_style.patch b/04/src/coding_style.patch
+++deleted file mode 100644
+++index 3bcde0f..0000000
+++--- a/04/src/coding_style.patch
++++++ /dev/null
+++@@ -1,95 +0,0 @@
+++-From 554a68039d22093208ce973591370676871feb33 Mon Sep 17 00:00:00 2001
+++-From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+++-Date: Thu, 20 Apr 2017 18:38:50 +0300
+++-Subject: [PATCH] Fixed coding style
+++-
+++----
+++- 04/src/coding_style.c | 20 ++++++++------------
+++- 04/src/hello.c        | 14 ++++----------
+++- 2 files changed, 12 insertions(+), 22 deletions(-)
+++-
+++-diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+++-index 9fd8f59..e29d3b1 100644
+++---- a/04/src/coding_style.c
+++-+++ b/04/src/coding_style.c
+++-@@ -3,35 +3,31 @@
+++- #include <asm/delay.h>
+++- #include <linux/slab.h>
+++-
+++--int do_work( int * my_int, int retval ) {
+++-+int do_work(int *my_int, int retval)
+++-+{
+++- 	int x;
+++--	int y=*my_int;
+++-+	int y = *my_int;
+++- 	int z;
+++--
+++--	for(x=0;x< * my_int;++x) {
+++-+
+++-+	for(x = 0; x < *my_int; ++x)
+++- 		udelay(10);
+++--	}
+++-
+++--	if (y < 10 )
+++--		// That was a long sleep, tell userspace about it
+++-+	if (y < 10)
+++- 		printk("We slept a long time!");
+++-
+++- 	z = x * y;
+++--
+++- 	return z;
+++- }
+++-
+++--int
+++--my_init (void)
+++-+int my_init (void)
+++- {
+++- 	int x = 10;
+++-
+++- 	x = do_work(&x, x);
+++--
+++- 	return x;
+++- }
+++-
+++--void my_exit( void )
+++-+void my_exit(void)
+++- {
+++- 	return;
+++- }
+++-diff --git a/04/src/hello.c b/04/src/hello.c
+++-index 157c20a..9ea08ac 100644
+++---- a/04/src/hello.c
+++-+++ b/04/src/hello.c
+++-@@ -1,6 +1,6 @@
+++--#include <linux/module.h> // included for all kernel modules
+++--#include <linux/kernel.h> // included for KERN_DEBUG
+++--#include <linux/init.h> // included for __init and __exit macros
+++-+#include <linux/module.h>
+++-+#include <linux/kernel.h>
+++-+#include <linux/init.h>
+++-
+++- MODULE_LICENSE("GPL");
+++- MODULE_AUTHOR("BENJI");
+++-@@ -8,18 +8,12 @@ MODULE_DESCRIPTION("A simple Hello World module");
+++-
+++- static int __init hello_init(void)
+++- {
+++--    /*
+++--        Initialize
+++--    */
+++-     printk(KERN_DEBUG "hello: Hello world!\n");
+++--    return 0; // Non-zero return means that the module couldn't be loaded.
+++-+    return 0;
+++- }
+++-
+++- static void __exit hello_cleanup(void)
+++- {
+++--    /*
+++--        Unload
+++--    */
+++-     printk(KERN_DEBUG "hello: Cleaning up module.\n");
+++- }
+++-
+++---
+++-2.7.4
+++-
+++diff --git a/04/src/hello.c b/04/src/hello.c
+++index 9ea08ac..2790459 100644
+++--- a/04/src/hello.c
++++++ b/04/src/hello.c
+++@@ -8,13 +8,13 @@ MODULE_DESCRIPTION("A simple Hello World module");
+++
+++ static int __init hello_init(void)
+++ {
+++-    printk(KERN_DEBUG "hello: Hello world!\n");
+++-    return 0;
++++	printk(KERN_DEBUG "hello: Hello world!\n");
++++	return 0;
+++ }
+++
+++ static void __exit hello_cleanup(void)
+++ {
+++-    printk(KERN_DEBUG "hello: Cleaning up module.\n");
++++	printk(KERN_DEBUG "hello: Cleaning up module.\n");
+++ }
+++
+++ module_init(hello_init);
+++--
+++2.7.4
+++
+++
+++From dd152268ffd5d1d273757ac4d5800f9402a070e6 Mon Sep 17 00:00:00 2001
+++From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+++Date: Thu, 20 Apr 2017 19:00:40 +0300
+++Subject: [PATCH 5/5] Style
+++
+++---
+++ 04/src/coding_style.c | 26 +++++++++++++-------------
+++ 04/src/hello.c        |  6 +++---
+++ 2 files changed, 16 insertions(+), 16 deletions(-)
+++
+++diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+++index 8eb4207..6042f65 100644
+++--- a/04/src/coding_style.c
++++++ b/04/src/coding_style.c
+++@@ -5,31 +5,31 @@
+++
+++ int do_work(int *my_int, int retval)
+++ {
+++-	int x;
+++-	int y = *my_int;
+++-	int z;
++++    int x;
++++    int y = *my_int;
++++    int z;
+++
+++-	for(x = 0; x < *my_int; ++x)
+++-		udelay(10);
++++    for (x = 0; x < *my_int; ++x)
++++	udelay(10);
+++
+++-	if (y < 10)
+++-		printk("We slept a long time!");
++++    if (y < 10)
++++	printk("We slept a long time!");
+++
+++-	z = x * y;
+++-	return z;
++++    z = x * y;
++++    return z;
+++ }
+++
+++ int my_init(void)
+++ {
+++-	int x = 10;
++++    int x = 10;
+++
+++-	x = do_work(&x, x);
+++-	return x;
++++    x = do_work(&x, x);
++++    return x;
+++ }
+++
+++ void my_exit(void)
+++ {
+++-	return;
++++    return;
+++ }
+++
+++ module_init(my_init);
+++diff --git a/04/src/hello.c b/04/src/hello.c
+++index 2790459..9ea08ac 100644
+++--- a/04/src/hello.c
++++++ b/04/src/hello.c
+++@@ -8,13 +8,13 @@ MODULE_DESCRIPTION("A simple Hello World module");
+++
+++ static int __init hello_init(void)
+++ {
+++-        printk(KERN_DEBUG "hello: Hello world!\n");
+++-        return 0;
++++    printk(KERN_DEBUG "hello: Hello world!\n");
++++    return 0;
+++ }
+++
+++ static void __exit hello_cleanup(void)
+++ {
+++-        printk(KERN_DEBUG "hello: Cleaning up module.\n");
++++    printk(KERN_DEBUG "hello: Cleaning up module.\n");
+++ }
+++
+++ module_init(hello_init);
+++--
+++2.7.4
+++
++diff --git a/04/src/hello.c b/04/src/hello.c
++index 9ea08ac..77981af 100644
++--- a/04/src/hello.c
+++++ b/04/src/hello.c
++@@ -8,13 +8,13 @@ MODULE_DESCRIPTION("A simple Hello World module");
++
++ static int __init hello_init(void)
++ {
++-    printk(KERN_DEBUG "hello: Hello world!\n");
++-    return 0;
+++	printk(KERN_DEBUG "hello: Hello world!\n");
+++	return 0;
++ }
++
++ static void __exit hello_cleanup(void)
++ {
++-    printk(KERN_DEBUG "hello: Cleaning up module.\n");
+++	printk(KERN_DEBUG "hello: Cleaning up module.\n");
++ }
++
++ module_init(hello_init);
++--
++2.7.4
++
+diff --git a/04/src/hello.c b/04/src/hello.c
+index 77981af..9af026d 100644
+--- a/04/src/hello.c
++++ b/04/src/hello.c
+@@ -18,4 +18,4 @@ static void __exit hello_cleanup(void)
+ }
+ 
+ module_init(hello_init);
+-module_exit(hello_cleanup);
++module_exit(hello_cleanup);
+\ No newline at end of file
+-- 
+2.7.4
+
+
+From 35e529c1fd8bf7eac369c32aebbd4bbe4f7ac375 Mon Sep 17 00:00:00 2001
+From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+Date: Thu, 20 Apr 2017 19:09:49 +0300
+Subject: [PATCH 8/9] Style
+
+---
+ 04/src/coding_style.patch | 1026 ---------------------------------------------
+ 1 file changed, 1026 deletions(-)
+ delete mode 100644 04/src/coding_style.patch
+
+diff --git a/04/src/coding_style.patch b/04/src/coding_style.patch
+deleted file mode 100644
+index d8be129..0000000
+--- a/04/src/coding_style.patch
++++ /dev/null
+@@ -1,1026 +0,0 @@
+-From 554a68039d22093208ce973591370676871feb33 Mon Sep 17 00:00:00 2001
+-From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+-Date: Thu, 20 Apr 2017 18:38:50 +0300
+-Subject: [PATCH 1/6] Fixed coding style
+-
+----
+- 04/src/coding_style.c | 20 ++++++++------------
+- 04/src/hello.c        | 14 ++++----------
+- 2 files changed, 12 insertions(+), 22 deletions(-)
+-
+-diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+-index 9fd8f59..e29d3b1 100644
+---- a/04/src/coding_style.c
+-+++ b/04/src/coding_style.c
+-@@ -3,35 +3,31 @@
+- #include <asm/delay.h>
+- #include <linux/slab.h>
+- 
+--int do_work( int * my_int, int retval ) {
+-+int do_work(int *my_int, int retval)
+-+{
+- 	int x;
+--	int y=*my_int;
+-+	int y = *my_int;
+- 	int z;
+--	
+--	for(x=0;x< * my_int;++x) {
+-+
+-+	for(x = 0; x < *my_int; ++x)
+- 		udelay(10);
+--	}
+- 
+--	if (y < 10 )
+--		// That was a long sleep, tell userspace about it
+-+	if (y < 10)
+- 		printk("We slept a long time!");
+- 
+- 	z = x * y;
+--
+- 	return z;
+- }
+- 
+--int
+--my_init (void)
+-+int my_init (void)
+- {
+- 	int x = 10;
+- 
+- 	x = do_work(&x, x);
+--
+- 	return x;
+- }
+- 
+--void my_exit( void )
+-+void my_exit(void)
+- {
+- 	return;
+- }
+-diff --git a/04/src/hello.c b/04/src/hello.c
+-index 157c20a..9ea08ac 100644
+---- a/04/src/hello.c
+-+++ b/04/src/hello.c
+-@@ -1,6 +1,6 @@
+--#include <linux/module.h> // included for all kernel modules
+--#include <linux/kernel.h> // included for KERN_DEBUG
+--#include <linux/init.h> // included for __init and __exit macros
+-+#include <linux/module.h>
+-+#include <linux/kernel.h>
+-+#include <linux/init.h>
+- 
+- MODULE_LICENSE("GPL");
+- MODULE_AUTHOR("BENJI");
+-@@ -8,18 +8,12 @@ MODULE_DESCRIPTION("A simple Hello World module");
+- 
+- static int __init hello_init(void)
+- {
+--    /*
+--        Initialize
+--    */
+-     printk(KERN_DEBUG "hello: Hello world!\n");
+--    return 0; // Non-zero return means that the module couldn't be loaded.
+-+    return 0;
+- }
+- 
+- static void __exit hello_cleanup(void)
+- {
+--    /*
+--        Unload
+--    */
+-     printk(KERN_DEBUG "hello: Cleaning up module.\n");
+- }
+- 
+--- 
+-2.7.4
+-
+-
+-From 9bff00fc99b336810437c124f66b96a73665abff Mon Sep 17 00:00:00 2001
+-From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+-Date: Thu, 20 Apr 2017 18:39:56 +0300
+-Subject: [PATCH 2/6] Created patch file
+-
+----
+- 04/src/coding_style.patch | 95 +++++++++++++++++++++++++++++++++++++++++++++++
+- 1 file changed, 95 insertions(+)
+- create mode 100644 04/src/coding_style.patch
+-
+-diff --git a/04/src/coding_style.patch b/04/src/coding_style.patch
+-new file mode 100644
+-index 0000000..3bcde0f
+---- /dev/null
+-+++ b/04/src/coding_style.patch
+-@@ -0,0 +1,95 @@
+-+From 554a68039d22093208ce973591370676871feb33 Mon Sep 17 00:00:00 2001
+-+From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+-+Date: Thu, 20 Apr 2017 18:38:50 +0300
+-+Subject: [PATCH] Fixed coding style
+-+
+-+---
+-+ 04/src/coding_style.c | 20 ++++++++------------
+-+ 04/src/hello.c        | 14 ++++----------
+-+ 2 files changed, 12 insertions(+), 22 deletions(-)
+-+
+-+diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+-+index 9fd8f59..e29d3b1 100644
+-+--- a/04/src/coding_style.c
+-++++ b/04/src/coding_style.c
+-+@@ -3,35 +3,31 @@
+-+ #include <asm/delay.h>
+-+ #include <linux/slab.h>
+-+ 
+-+-int do_work( int * my_int, int retval ) {
+-++int do_work(int *my_int, int retval)
+-++{
+-+ 	int x;
+-+-	int y=*my_int;
+-++	int y = *my_int;
+-+ 	int z;
+-+-	
+-+-	for(x=0;x< * my_int;++x) {
+-++
+-++	for(x = 0; x < *my_int; ++x)
+-+ 		udelay(10);
+-+-	}
+-+ 
+-+-	if (y < 10 )
+-+-		// That was a long sleep, tell userspace about it
+-++	if (y < 10)
+-+ 		printk("We slept a long time!");
+-+ 
+-+ 	z = x * y;
+-+-
+-+ 	return z;
+-+ }
+-+ 
+-+-int
+-+-my_init (void)
+-++int my_init (void)
+-+ {
+-+ 	int x = 10;
+-+ 
+-+ 	x = do_work(&x, x);
+-+-
+-+ 	return x;
+-+ }
+-+ 
+-+-void my_exit( void )
+-++void my_exit(void)
+-+ {
+-+ 	return;
+-+ }
+-+diff --git a/04/src/hello.c b/04/src/hello.c
+-+index 157c20a..9ea08ac 100644
+-+--- a/04/src/hello.c
+-++++ b/04/src/hello.c
+-+@@ -1,6 +1,6 @@
+-+-#include <linux/module.h> // included for all kernel modules
+-+-#include <linux/kernel.h> // included for KERN_DEBUG
+-+-#include <linux/init.h> // included for __init and __exit macros
+-++#include <linux/module.h>
+-++#include <linux/kernel.h>
+-++#include <linux/init.h>
+-+ 
+-+ MODULE_LICENSE("GPL");
+-+ MODULE_AUTHOR("BENJI");
+-+@@ -8,18 +8,12 @@ MODULE_DESCRIPTION("A simple Hello World module");
+-+ 
+-+ static int __init hello_init(void)
+-+ {
+-+-    /*
+-+-        Initialize
+-+-    */
+-+     printk(KERN_DEBUG "hello: Hello world!\n");
+-+-    return 0; // Non-zero return means that the module couldn't be loaded.
+-++    return 0;
+-+ }
+-+ 
+-+ static void __exit hello_cleanup(void)
+-+ {
+-+-    /*
+-+-        Unload
+-+-    */
+-+     printk(KERN_DEBUG "hello: Cleaning up module.\n");
+-+ }
+-+ 
+-+-- 
+-+2.7.4
+-+
+--- 
+-2.7.4
+-
+-
+-From 1da04e2c57c23371e3d48798f04f17239de688ba Mon Sep 17 00:00:00 2001
+-From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+-Date: Thu, 20 Apr 2017 18:47:57 +0300
+-Subject: [PATCH 3/6] Fixed line endings
+-
+----
+- 04/src/:q | 0
+- 1 file changed, 0 insertions(+), 0 deletions(-)
+- create mode 100644 04/src/:q
+-
+-diff --git a/04/src/:q b/04/src/:q
+-new file mode 100644
+-index 0000000..e69de29
+--- 
+-2.7.4
+-
+-
+-From 10c45828230973edfa22c39e08cda91f27d2b268 Mon Sep 17 00:00:00 2001
+-From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+-Date: Thu, 20 Apr 2017 18:51:32 +0300
+-Subject: [PATCH 4/6] Fixed coding style
+-
+----
+- 04/src/:q                 |  0
+- 04/src/coding_style.c     |  2 +-
+- 04/src/coding_style.patch | 95 -----------------------------------------------
+- 04/src/hello.c            |  6 +--
+- 4 files changed, 4 insertions(+), 99 deletions(-)
+- delete mode 100644 04/src/:q
+- delete mode 100644 04/src/coding_style.patch
+-
+-diff --git a/04/src/:q b/04/src/:q
+-deleted file mode 100644
+-index e69de29..0000000
+-diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+-index e29d3b1..8eb4207 100644
+---- a/04/src/coding_style.c
+-+++ b/04/src/coding_style.c
+-@@ -19,7 +19,7 @@ int do_work(int *my_int, int retval)
+- 	return z;
+- }
+- 
+--int my_init (void)
+-+int my_init(void)
+- {
+- 	int x = 10;
+- 
+-diff --git a/04/src/coding_style.patch b/04/src/coding_style.patch
+-deleted file mode 100644
+-index 3bcde0f..0000000
+---- a/04/src/coding_style.patch
+-+++ /dev/null
+-@@ -1,95 +0,0 @@
+--From 554a68039d22093208ce973591370676871feb33 Mon Sep 17 00:00:00 2001
+--From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+--Date: Thu, 20 Apr 2017 18:38:50 +0300
+--Subject: [PATCH] Fixed coding style
+--
+-----
+-- 04/src/coding_style.c | 20 ++++++++------------
+-- 04/src/hello.c        | 14 ++++----------
+-- 2 files changed, 12 insertions(+), 22 deletions(-)
+--
+--diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+--index 9fd8f59..e29d3b1 100644
+----- a/04/src/coding_style.c
+--+++ b/04/src/coding_style.c
+--@@ -3,35 +3,31 @@
+-- #include <asm/delay.h>
+-- #include <linux/slab.h>
+-- 
+---int do_work( int * my_int, int retval ) {
+--+int do_work(int *my_int, int retval)
+--+{
+-- 	int x;
+---	int y=*my_int;
+--+	int y = *my_int;
+-- 	int z;
+---	
+---	for(x=0;x< * my_int;++x) {
+--+
+--+	for(x = 0; x < *my_int; ++x)
+-- 		udelay(10);
+---	}
+-- 
+---	if (y < 10 )
+---		// That was a long sleep, tell userspace about it
+--+	if (y < 10)
+-- 		printk("We slept a long time!");
+-- 
+-- 	z = x * y;
+---
+-- 	return z;
+-- }
+-- 
+---int
+---my_init (void)
+--+int my_init (void)
+-- {
+-- 	int x = 10;
+-- 
+-- 	x = do_work(&x, x);
+---
+-- 	return x;
+-- }
+-- 
+---void my_exit( void )
+--+void my_exit(void)
+-- {
+-- 	return;
+-- }
+--diff --git a/04/src/hello.c b/04/src/hello.c
+--index 157c20a..9ea08ac 100644
+----- a/04/src/hello.c
+--+++ b/04/src/hello.c
+--@@ -1,6 +1,6 @@
+---#include <linux/module.h> // included for all kernel modules
+---#include <linux/kernel.h> // included for KERN_DEBUG
+---#include <linux/init.h> // included for __init and __exit macros
+--+#include <linux/module.h>
+--+#include <linux/kernel.h>
+--+#include <linux/init.h>
+-- 
+-- MODULE_LICENSE("GPL");
+-- MODULE_AUTHOR("BENJI");
+--@@ -8,18 +8,12 @@ MODULE_DESCRIPTION("A simple Hello World module");
+-- 
+-- static int __init hello_init(void)
+-- {
+---    /*
+---        Initialize
+---    */
+--     printk(KERN_DEBUG "hello: Hello world!\n");
+---    return 0; // Non-zero return means that the module couldn't be loaded.
+--+    return 0;
+-- }
+-- 
+-- static void __exit hello_cleanup(void)
+-- {
+---    /*
+---        Unload
+---    */
+--     printk(KERN_DEBUG "hello: Cleaning up module.\n");
+-- }
+-- 
+---- 
+--2.7.4
+--
+-diff --git a/04/src/hello.c b/04/src/hello.c
+-index 9ea08ac..2790459 100644
+---- a/04/src/hello.c
+-+++ b/04/src/hello.c
+-@@ -8,13 +8,13 @@ MODULE_DESCRIPTION("A simple Hello World module");
+- 
+- static int __init hello_init(void)
+- {
+--    printk(KERN_DEBUG "hello: Hello world!\n");
+--    return 0;
+-+        printk(KERN_DEBUG "hello: Hello world!\n");
+-+        return 0;
+- }
+- 
+- static void __exit hello_cleanup(void)
+- {
+--    printk(KERN_DEBUG "hello: Cleaning up module.\n");
+-+        printk(KERN_DEBUG "hello: Cleaning up module.\n");
+- }
+- 
+- module_init(hello_init);
+--- 
+-2.7.4
+-
+-
+-From dd152268ffd5d1d273757ac4d5800f9402a070e6 Mon Sep 17 00:00:00 2001
+-From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+-Date: Thu, 20 Apr 2017 19:00:40 +0300
+-Subject: [PATCH 5/6] Style
+-
+----
+- 04/src/coding_style.c | 26 +++++++++++++-------------
+- 04/src/hello.c        |  6 +++---
+- 2 files changed, 16 insertions(+), 16 deletions(-)
+-
+-diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+-index 8eb4207..6042f65 100644
+---- a/04/src/coding_style.c
+-+++ b/04/src/coding_style.c
+-@@ -5,31 +5,31 @@
+- 
+- int do_work(int *my_int, int retval)
+- {
+--	int x;
+--	int y = *my_int;
+--	int z;
+-+    int x;
+-+    int y = *my_int;
+-+    int z;
+- 
+--	for(x = 0; x < *my_int; ++x)
+--		udelay(10);
+-+    for(x = 0; x < *my_int; ++x)
+-+	udelay(10);
+- 
+--	if (y < 10)
+--		printk("We slept a long time!");
+-+    if (y < 10)
+-+	printk("We slept a long time!");
+- 
+--	z = x * y;
+--	return z;
+-+    z = x * y;
+-+    return z;
+- }
+- 
+- int my_init(void)
+- {
+--	int x = 10;
+-+    int x = 10;
+- 
+--	x = do_work(&x, x);
+--	return x;
+-+    x = do_work(&x, x);
+-+    return x;
+- }
+- 
+- void my_exit(void)
+- {
+--	return;
+-+    return;
+- }
+- 
+- module_init(my_init);
+-diff --git a/04/src/hello.c b/04/src/hello.c
+-index 2790459..9ea08ac 100644
+---- a/04/src/hello.c
+-+++ b/04/src/hello.c
+-@@ -8,13 +8,13 @@ MODULE_DESCRIPTION("A simple Hello World module");
+- 
+- static int __init hello_init(void)
+- {
+--        printk(KERN_DEBUG "hello: Hello world!\n");
+--        return 0;
+-+    printk(KERN_DEBUG "hello: Hello world!\n");
+-+    return 0;
+- }
+- 
+- static void __exit hello_cleanup(void)
+- {
+--        printk(KERN_DEBUG "hello: Cleaning up module.\n");
+-+    printk(KERN_DEBUG "hello: Cleaning up module.\n");
+- }
+- 
+- module_init(hello_init);
+--- 
+-2.7.4
+-
+-
+-From 94bccc85d8c508e26d756c2dc4d2ddf0902ea40f Mon Sep 17 00:00:00 2001
+-From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+-Date: Thu, 20 Apr 2017 19:07:04 +0300
+-Subject: [PATCH 6/6] Style
+-
+----
+- 04/src/coding_style.c     |  26 +--
+- 04/src/coding_style.patch | 467 ++++++++++++++++++++++++++++++++++++++++++++++
+- 04/src/hello.c            |   6 +-
+- 3 files changed, 483 insertions(+), 16 deletions(-)
+- create mode 100644 04/src/coding_style.patch
+-
+-diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+-index 6042f65..8eb4207 100644
+---- a/04/src/coding_style.c
+-+++ b/04/src/coding_style.c
+-@@ -5,31 +5,31 @@
+- 
+- int do_work(int *my_int, int retval)
+- {
+--    int x;
+--    int y = *my_int;
+--    int z;
+-+	int x;
+-+	int y = *my_int;
+-+	int z;
+- 
+--    for(x = 0; x < *my_int; ++x)
+--	udelay(10);
+-+	for(x = 0; x < *my_int; ++x)
+-+		udelay(10);
+- 
+--    if (y < 10)
+--	printk("We slept a long time!");
+-+	if (y < 10)
+-+		printk("We slept a long time!");
+- 
+--    z = x * y;
+--    return z;
+-+	z = x * y;
+-+	return z;
+- }
+- 
+- int my_init(void)
+- {
+--    int x = 10;
+-+	int x = 10;
+- 
+--    x = do_work(&x, x);
+--    return x;
+-+	x = do_work(&x, x);
+-+	return x;
+- }
+- 
+- void my_exit(void)
+- {
+--    return;
+-+	return;
+- }
+- 
+- module_init(my_init);
+-diff --git a/04/src/coding_style.patch b/04/src/coding_style.patch
+-new file mode 100644
+-index 0000000..8f3314c
+---- /dev/null
+-+++ b/04/src/coding_style.patch
+-@@ -0,0 +1,467 @@
+-+From 554a68039d22093208ce973591370676871feb33 Mon Sep 17 00:00:00 2001
+-+From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+-+Date: Thu, 20 Apr 2017 18:38:50 +0300
+-+Subject: [PATCH 1/5] Fixed coding style
+-+
+-+---
+-+ 04/src/coding_style.c | 20 ++++++++------------
+-+ 04/src/hello.c        | 14 ++++----------
+-+ 2 files changed, 12 insertions(+), 22 deletions(-)
+-+
+-+diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+-+index 9fd8f59..e29d3b1 100644
+-+--- a/04/src/coding_style.c
+-++++ b/04/src/coding_style.c
+-+@@ -3,35 +3,31 @@
+-+ #include <asm/delay.h>
+-+ #include <linux/slab.h>
+-+ 
+-+-int do_work( int * my_int, int retval ) {
+-++int do_work(int *my_int, int retval)
+-++{
+-+ 	int x;
+-+-	int y=*my_int;
+-++	int y = *my_int;
+-+ 	int z;
+-+-	
+-+-	for(x=0;x< * my_int;++x) {
+-++
+-++	for (x = 0; x < *my_int; ++x)
+-+ 		udelay(10);
+-+-	}
+-+ 
+-+-	if (y < 10 )
+-+-		// That was a long sleep, tell userspace about it
+-++	if (y < 10)
+-+ 		printk("We slept a long time!");
+-+ 
+-+ 	z = x * y;
+-+-
+-+ 	return z;
+-+ }
+-+ 
+-+-int
+-+-my_init (void)
+-++int my_init(void)
+-+ {
+-+ 	int x = 10;
+-+ 
+-+ 	x = do_work(&x, x);
+-+-
+-+ 	return x;
+-+ }
+-+ 
+-+-void my_exit( void )
+-++void my_exit(void)
+-+ {
+-+ 	return;
+-+ }
+-+diff --git a/04/src/hello.c b/04/src/hello.c
+-+index 157c20a..9ea08ac 100644
+-+--- a/04/src/hello.c
+-++++ b/04/src/hello.c
+-+@@ -1,6 +1,6 @@
+-+-#include <linux/module.h> // included for all kernel modules
+-+-#include <linux/kernel.h> // included for KERN_DEBUG
+-+-#include <linux/init.h> // included for __init and __exit macros
+-++#include <linux/module.h>
+-++#include <linux/kernel.h>
+-++#include <linux/init.h>
+-+ 
+-+ MODULE_LICENSE("GPL");
+-+ MODULE_AUTHOR("BENJI");
+-+@@ -8,18 +8,12 @@ MODULE_DESCRIPTION("A simple Hello World module");
+-+ 
+-+ static int __init hello_init(void)
+-+ {
+-+-    /*
+-+-        Initialize
+-+-    */
+-+     printk(KERN_DEBUG "hello: Hello world!\n");
+-+-    return 0; // Non-zero return means that the module couldn't be loaded.
+-++    return 0;
+-+ }
+-+ 
+-+ static void __exit hello_cleanup(void)
+-+ {
+-+-    /*
+-+-        Unload
+-+-    */
+-+     printk(KERN_DEBUG "hello: Cleaning up module.\n");
+-+ }
+-+ 
+-+-- 
+-+2.7.4
+-+
+-+
+-+From 9bff00fc99b336810437c124f66b96a73665abff Mon Sep 17 00:00:00 2001
+-+From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+-+Date: Thu, 20 Apr 2017 18:39:56 +0300
+-+Subject: [PATCH 2/5] Created patch file
+-+
+-+---
+-+ 04/src/coding_style.patch | 95 +++++++++++++++++++++++++++++++++++++++++++++++
+-+ 1 file changed, 95 insertions(+)
+-+ create mode 100644 04/src/coding_style.patch
+-+
+-+diff --git a/04/src/coding_style.patch b/04/src/coding_style.patch
+-+new file mode 100644
+-+index 0000000..3bcde0f
+-+--- /dev/null
+-++++ b/04/src/coding_style.patch
+-+@@ -0,0 +1,95 @@
+-++From 554a68039d22093208ce973591370676871feb33 Mon Sep 17 00:00:00 2001
+-++From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+-++Date: Thu, 20 Apr 2017 18:38:50 +0300
+-++Subject: [PATCH] Fixed coding style
+-++
+-++---
+-++ 04/src/coding_style.c | 20 ++++++++------------
+-++ 04/src/hello.c        | 14 ++++----------
+-++ 2 files changed, 12 insertions(+), 22 deletions(-)
+-++
+-++diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+-++index 9fd8f59..e29d3b1 100644
+-++--- a/04/src/coding_style.c
+-+++++ b/04/src/coding_style.c
+-++@@ -3,35 +3,31 @@
+-++ #include <asm/delay.h>
+-++ #include <linux/slab.h>
+-++
+-++-int do_work( int * my_int, int retval ) {
+-+++int do_work(int *my_int, int retval)
+-+++{
+-++ 	int x;
+-++-	int y=*my_int;
+-+++	int y = *my_int;
+-++ 	int z;
+-++-
+-++-	for(x=0;x< * my_int;++x) {
+-+++
+-+++	for(x = 0; x < *my_int; ++x)
+-++ 		udelay(10);
+-++-	}
+-++
+-++-	if (y < 10 )
+-++-		// That was a long sleep, tell userspace about it
+-+++	if (y < 10)
+-++ 		printk("We slept a long time!");
+-++
+-++ 	z = x * y;
+-++-
+-++ 	return z;
+-++ }
+-++
+-++-int
+-++-my_init (void)
+-+++int my_init (void)
+-++ {
+-++ 	int x = 10;
+-++
+-++ 	x = do_work(&x, x);
+-++-
+-++ 	return x;
+-++ }
+-++
+-++-void my_exit( void )
+-+++void my_exit(void)
+-++ {
+-++ 	return;
+-++ }
+-++diff --git a/04/src/hello.c b/04/src/hello.c
+-++index 157c20a..9ea08ac 100644
+-++--- a/04/src/hello.c
+-+++++ b/04/src/hello.c
+-++@@ -1,6 +1,6 @@
+-++-#include <linux/module.h> // included for all kernel modules
+-++-#include <linux/kernel.h> // included for KERN_DEBUG
+-++-#include <linux/init.h> // included for __init and __exit macros
+-+++#include <linux/module.h>
+-+++#include <linux/kernel.h>
+-+++#include <linux/init.h>
+-++
+-++ MODULE_LICENSE("GPL");
+-++ MODULE_AUTHOR("BENJI");
+-++@@ -8,18 +8,12 @@ MODULE_DESCRIPTION("A simple Hello World module");
+-++
+-++ static int __init hello_init(void)
+-++ {
+-++-    /*
+-++-        Initialize
+-++-    */
+-++     printk(KERN_DEBUG "hello: Hello world!\n");
+-++-    return 0; // Non-zero return means that the module couldn't be loaded.
+-+++    return 0;
+-++ }
+-++
+-++ static void __exit hello_cleanup(void)
+-++ {
+-++-    /*
+-++-        Unload
+-++-    */
+-++     printk(KERN_DEBUG "hello: Cleaning up module.\n");
+-++ }
+-++
+-++--
+-++2.7.4
+-++
+-+-- 
+-+2.7.4
+-+
+-+
+-+From 1da04e2c57c23371e3d48798f04f17239de688ba Mon Sep 17 00:00:00 2001
+-+From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+-+Date: Thu, 20 Apr 2017 18:47:57 +0300
+-+Subject: [PATCH 3/5] Fixed line endings
+-+
+-+---
+-+ 04/src/:q | 0
+-+ 1 file changed, 0 insertions(+), 0 deletions(-)
+-+ create mode 100644 04/src/:q
+-+
+-+diff --git a/04/src/:q b/04/src/:q
+-+new file mode 100644
+-+index 0000000..e69de29
+-+-- 
+-+2.7.4
+-+
+-+
+-+From 10c45828230973edfa22c39e08cda91f27d2b268 Mon Sep 17 00:00:00 2001
+-+From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+-+Date: Thu, 20 Apr 2017 18:51:32 +0300
+-+Subject: [PATCH 4/5] Fixed coding style
+-+
+-+---
+-+ 04/src/:q                 |  0
+-+ 04/src/coding_style.c     |  2 +-
+-+ 04/src/coding_style.patch | 95 -----------------------------------------------
+-+ 04/src/hello.c            |  6 +--
+-+ 4 files changed, 4 insertions(+), 99 deletions(-)
+-+ delete mode 100644 04/src/:q
+-+ delete mode 100644 04/src/coding_style.patch
+-+
+-+diff --git a/04/src/:q b/04/src/:q
+-+deleted file mode 100644
+-+index e69de29..0000000
+-+diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+-+index e29d3b1..8eb4207 100644
+-+--- a/04/src/coding_style.c
+-++++ b/04/src/coding_style.c
+-+@@ -19,7 +19,7 @@ int do_work(int *my_int, int retval)
+-+ 	return z;
+-+ }
+-+ 
+-+-int my_init (void)
+-++int my_init(void)
+-+ {
+-+ 	int x = 10;
+-+ 
+-+diff --git a/04/src/coding_style.patch b/04/src/coding_style.patch
+-+deleted file mode 100644
+-+index 3bcde0f..0000000
+-+--- a/04/src/coding_style.patch
+-++++ /dev/null
+-+@@ -1,95 +0,0 @@
+-+-From 554a68039d22093208ce973591370676871feb33 Mon Sep 17 00:00:00 2001
+-+-From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+-+-Date: Thu, 20 Apr 2017 18:38:50 +0300
+-+-Subject: [PATCH] Fixed coding style
+-+-
+-+----
+-+- 04/src/coding_style.c | 20 ++++++++------------
+-+- 04/src/hello.c        | 14 ++++----------
+-+- 2 files changed, 12 insertions(+), 22 deletions(-)
+-+-
+-+-diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+-+-index 9fd8f59..e29d3b1 100644
+-+---- a/04/src/coding_style.c
+-+-+++ b/04/src/coding_style.c
+-+-@@ -3,35 +3,31 @@
+-+- #include <asm/delay.h>
+-+- #include <linux/slab.h>
+-+- 
+-+--int do_work( int * my_int, int retval ) {
+-+-+int do_work(int *my_int, int retval)
+-+-+{
+-+- 	int x;
+-+--	int y=*my_int;
+-+-+	int y = *my_int;
+-+- 	int z;
+-+--	
+-+--	for(x=0;x< * my_int;++x) {
+-+-+
+-+-+	for(x = 0; x < *my_int; ++x)
+-+- 		udelay(10);
+-+--	}
+-+- 
+-+--	if (y < 10 )
+-+--		// That was a long sleep, tell userspace about it
+-+-+	if (y < 10)
+-+- 		printk("We slept a long time!");
+-+- 
+-+- 	z = x * y;
+-+--
+-+- 	return z;
+-+- }
+-+- 
+-+--int
+-+--my_init (void)
+-+-+int my_init (void)
+-+- {
+-+- 	int x = 10;
+-+- 
+-+- 	x = do_work(&x, x);
+-+--
+-+- 	return x;
+-+- }
+-+- 
+-+--void my_exit( void )
+-+-+void my_exit(void)
+-+- {
+-+- 	return;
+-+- }
+-+-diff --git a/04/src/hello.c b/04/src/hello.c
+-+-index 157c20a..9ea08ac 100644
+-+---- a/04/src/hello.c
+-+-+++ b/04/src/hello.c
+-+-@@ -1,6 +1,6 @@
+-+--#include <linux/module.h> // included for all kernel modules
+-+--#include <linux/kernel.h> // included for KERN_DEBUG
+-+--#include <linux/init.h> // included for __init and __exit macros
+-+-+#include <linux/module.h>
+-+-+#include <linux/kernel.h>
+-+-+#include <linux/init.h>
+-+- 
+-+- MODULE_LICENSE("GPL");
+-+- MODULE_AUTHOR("BENJI");
+-+-@@ -8,18 +8,12 @@ MODULE_DESCRIPTION("A simple Hello World module");
+-+- 
+-+- static int __init hello_init(void)
+-+- {
+-+--    /*
+-+--        Initialize
+-+--    */
+-+-     printk(KERN_DEBUG "hello: Hello world!\n");
+-+--    return 0; // Non-zero return means that the module couldn't be loaded.
+-+-+    return 0;
+-+- }
+-+- 
+-+- static void __exit hello_cleanup(void)
+-+- {
+-+--    /*
+-+--        Unload
+-+--    */
+-+-     printk(KERN_DEBUG "hello: Cleaning up module.\n");
+-+- }
+-+- 
+-+--- 
+-+-2.7.4
+-+-
+-+diff --git a/04/src/hello.c b/04/src/hello.c
+-+index 9ea08ac..2790459 100644
+-+--- a/04/src/hello.c
+-++++ b/04/src/hello.c
+-+@@ -8,13 +8,13 @@ MODULE_DESCRIPTION("A simple Hello World module");
+-+ 
+-+ static int __init hello_init(void)
+-+ {
+-+-    printk(KERN_DEBUG "hello: Hello world!\n");
+-+-    return 0;
+-++	printk(KERN_DEBUG "hello: Hello world!\n");
+-++	return 0;
+-+ }
+-+ 
+-+ static void __exit hello_cleanup(void)
+-+ {
+-+-    printk(KERN_DEBUG "hello: Cleaning up module.\n");
+-++	printk(KERN_DEBUG "hello: Cleaning up module.\n");
+-+ }
+-+ 
+-+ module_init(hello_init);
+-+-- 
+-+2.7.4
+-+
+-+
+-+From dd152268ffd5d1d273757ac4d5800f9402a070e6 Mon Sep 17 00:00:00 2001
+-+From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+-+Date: Thu, 20 Apr 2017 19:00:40 +0300
+-+Subject: [PATCH 5/5] Style
+-+
+-+---
+-+ 04/src/coding_style.c | 26 +++++++++++++-------------
+-+ 04/src/hello.c        |  6 +++---
+-+ 2 files changed, 16 insertions(+), 16 deletions(-)
+-+
+-+diff --git a/04/src/coding_style.c b/04/src/coding_style.c
+-+index 8eb4207..6042f65 100644
+-+--- a/04/src/coding_style.c
+-++++ b/04/src/coding_style.c
+-+@@ -5,31 +5,31 @@
+-+ 
+-+ int do_work(int *my_int, int retval)
+-+ {
+-+-	int x;
+-+-	int y = *my_int;
+-+-	int z;
+-++    int x;
+-++    int y = *my_int;
+-++    int z;
+-+ 
+-+-	for(x = 0; x < *my_int; ++x)
+-+-		udelay(10);
+-++    for (x = 0; x < *my_int; ++x)
+-++	udelay(10);
+-+ 
+-+-	if (y < 10)
+-+-		printk("We slept a long time!");
+-++    if (y < 10)
+-++	printk("We slept a long time!");
+-+ 
+-+-	z = x * y;
+-+-	return z;
+-++    z = x * y;
+-++    return z;
+-+ }
+-+ 
+-+ int my_init(void)
+-+ {
+-+-	int x = 10;
+-++    int x = 10;
+-+ 
+-+-	x = do_work(&x, x);
+-+-	return x;
+-++    x = do_work(&x, x);
+-++    return x;
+-+ }
+-+ 
+-+ void my_exit(void)
+-+ {
+-+-	return;
+-++    return;
+-+ }
+-+ 
+-+ module_init(my_init);
+-+diff --git a/04/src/hello.c b/04/src/hello.c
+-+index 2790459..9ea08ac 100644
+-+--- a/04/src/hello.c
+-++++ b/04/src/hello.c
+-+@@ -8,13 +8,13 @@ MODULE_DESCRIPTION("A simple Hello World module");
+-+ 
+-+ static int __init hello_init(void)
+-+ {
+-+-        printk(KERN_DEBUG "hello: Hello world!\n");
+-+-        return 0;
+-++    printk(KERN_DEBUG "hello: Hello world!\n");
+-++    return 0;
+-+ }
+-+ 
+-+ static void __exit hello_cleanup(void)
+-+ {
+-+-        printk(KERN_DEBUG "hello: Cleaning up module.\n");
+-++    printk(KERN_DEBUG "hello: Cleaning up module.\n");
+-+ }
+-+ 
+-+ module_init(hello_init);
+-+-- 
+-+2.7.4
+-+
+-diff --git a/04/src/hello.c b/04/src/hello.c
+-index 9ea08ac..77981af 100644
+---- a/04/src/hello.c
+-+++ b/04/src/hello.c
+-@@ -8,13 +8,13 @@ MODULE_DESCRIPTION("A simple Hello World module");
+- 
+- static int __init hello_init(void)
+- {
+--    printk(KERN_DEBUG "hello: Hello world!\n");
+--    return 0;
+-+	printk(KERN_DEBUG "hello: Hello world!\n");
+-+	return 0;
+- }
+- 
+- static void __exit hello_cleanup(void)
+- {
+--    printk(KERN_DEBUG "hello: Cleaning up module.\n");
+-+	printk(KERN_DEBUG "hello: Cleaning up module.\n");
+- }
+- 
+- module_init(hello_init);
+--- 
+-2.7.4
+-
+-- 
+2.7.4
+
+
+From db27806681dff25ea53837433c7b0692d44da7a6 Mon Sep 17 00:00:00 2001
+From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+Date: Thu, 20 Apr 2017 19:11:04 +0300
+Subject: [PATCH 9/9] Fixed coding style
+
+---
+ 04/src/hello.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/04/src/hello.c b/04/src/hello.c
+index 9af026d..77981af 100644
+--- a/04/src/hello.c
++++ b/04/src/hello.c
+@@ -18,4 +18,4 @@ static void __exit hello_cleanup(void)
+ }
+ 
+ module_init(hello_init);
+-module_exit(hello_cleanup);
+\ No newline at end of file
++module_exit(hello_cleanup);
+-- 
+2.7.4
+
