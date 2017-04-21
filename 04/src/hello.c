@@ -8,13 +8,13 @@ MODULE_DESCRIPTION("A simple Hello World module");
 
 static int __init hello_init(void)
 {
-	printk(KERN_DEBUG "hello: Hello world!\n");
+	pr_debug("hello: Hello world!\n");
 	return 0;
 }
 
 static void __exit hello_cleanup(void)
 {
-	printk(KERN_DEBUG "hello: Cleaning up module.\n");
+	pr_debug("hello: Cleaning up module.\n");
 }
 
 module_init(hello_init);
