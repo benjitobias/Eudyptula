@@ -18,42 +18,16 @@ static struct usb_device_id hello_table[] = {
 
 MODULE_DEVICE_TABLE(usb, hello_table);
 
-static int hello_probe(struct usb_interface *interface,
-	const struct usb_device_id *id)
-{
-	pr_info("[*] Keyboard connected\n");
-	return 0;
-}
-
-static void hello_disconnect(struct usb_interface *interface)
-{
-	pr_info("[*] Keyboard disconnected\n");
-}
-
-
-// usb driver
-static struct usb_driver hello_driver = {
-	.name = "Hello World Usb Driver",
-	.id_table = hello_table, // usb_device_id
-	.probe = hello_probe,
-	.disconnect = hello_disconnect,
-};
-
 static int __init hello_init(void)
 {
-	int ret = -1;
 
-	pr_info("[*] Hello world!");
-	pr_info("[*] Registering driver");
-	ret = usb_register(&hello_driver);
-	pr_info("[*] Registration complete");
-	return ret;
+	pr_info("[*] Hello world!\n");
+	return 0;
 }
 
 static void __exit hello_cleanup(void)
 {
-	pr_info("[*] Goodbye world!");
-	usb_deregister(&hello_driver);
+	pr_info("[*] Goodbye world!\n");
 }
 
 module_init(hello_init);
