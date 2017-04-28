@@ -1,0 +1,5 @@
+http://www.computerhope.com/unix/depmod.htm
+https://www.youtube.com/watch?v=NYRhkGrt4Q4&index=1&list=PLa2N8kjIXIWqYUmF2HvYrv35_R2JthYFo
+https://www.youtube.com/watch?v=5IDL070RtoQ&index=2&list=PLa2N8kjIXIWqYUmF2HvYrv35_R2JthYFo
+http://stackoverflow.com/questions/23307579/loading-module-on-keyboard-hotplug
+https://unix.stackexchange.com/questions/120839/usb-kernel-module-does-not-load-on-demand-but-works-fine-with-insmod-and-modprob
