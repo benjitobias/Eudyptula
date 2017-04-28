@@ -1,0 +1,14 @@
+dmesg:
+
+	[105134.739441] usb 1-1.1: USB disconnect, device number 17
+	[105137.264188] usb 1-1.1: new low-speed USB device number 18 using ehci-pci
+	[105137.382016] usb 1-1.1: New USB device found, idVendor=413c, idProduct=2003
+	[105137.382020] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+	[105137.382022] usb 1-1.1: Product: Dell USB Keyboard
+	[105137.382023] usb 1-1.1: Manufacturer: Dell
+	[105137.388013] input: Dell Dell USB Keyboard as /devices/pci0000:00/0000:00:1a.0/usb1/1-1/1-1.1/1-1.1:1.0/0003:413C:2003.0011/input/input23
+	[105137.444511] hid-generic 0003:413C:2003.0011: input,hidraw2: USB HID v1.10 Keyboard [Dell Dell USB Keyboard] on usb-0000:00:1a.0-1.1/input0
+	[105137.966776] [*] Hello world!
+
+cat modules.alias | tail -1
+	alias usb:v*p*d*dc*dsc*dp*ic03isc01ip01in* hello
