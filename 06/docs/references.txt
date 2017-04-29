@@ -1,3 +1,11 @@
 http://derekmolloy.ie/writing-a-linux-kernel-module-part-2-a-character-device/
 
 http://www-numi.fnal.gov/offline_software/srt_public_context/WebDocs/Errors/unix_system_errors.html
+
+Make and install man pages
+
+yes, there is 9th section of man pages. If you have no files in man/man9/ directories,
+you have to build it from linux source.
+So download source and build man pages with command: "make mandocs",
+then install them with command: "make installmandocs" to /usr/local/man/man9/
+There are many others targets, for list see "make help".
