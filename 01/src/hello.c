@@ -8,15 +8,13 @@
 
 #define DEVICE_NAME "eudyptula" // Name that will appear in /dev
 #define CLASS_NAME "eud" // Device class - character device driver
-
+#define EUD_ID "<ID>" // Eudyptula ID
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("BENJI");
 MODULE_DESCRIPTION("A simple Hello World module");
 
 static int major_number; // Stores the device number - auto generated
-static char message[256] = {0}; // Memory of string from user space
-static short size_of_message; // Size of string
 static int number_opens; // Number of times the device has been opened
 static struct class *eud_char_class = NULL; // Device class struct pointer
 static struct device *eud_char_device = NULL; // Device struct pointer
@@ -41,21 +39,21 @@ static struct file_operations f_ops =
 
 static int __init hello_init(void)
 {
-	pr_info("[*] Hello world!\n");
+	pr_info("[*] Loaded Eudyptula module.\n");
 
 	// Try to dynamically generate a major number for device.
 	major_number = register_chrdev(0, DEVICE_NAME, &f_ops);
 	if (0 > major_number) {
-		pr_warn("[!] Failed to register major number\n");
+		pr_warn("[!] Failed to register major number.\n");
 		return major_number;
 	}
-	pr_info("[*] Register major number: %d\n", major_number);
+	pr_info("[*] Registered major number: %d.\n", major_number);
 
 	// Register device class
 	eud_char_class = class_create(THIS_MODULE, CLASS_NAME);
 	if (IS_ERR(eud_char_class)) { // Check for error and clean up
 		unregister_chrdev(major_number, DEVICE_NAME);
-		pr_warn("[!] Failed to register device class\n");
+		pr_warn("[!] Failed to register device class.\n");
 		return PTR_ERR(eud_char_class); // Correct way to return an error on a pointer
 	}
 	
@@ -67,10 +65,10 @@ static int __init hello_init(void)
 	if (IS_ERR(eud_char_device)) { // clean up if error
 		class_destroy(eud_char_class);
 		unregister_chrdev(major_number, DEVICE_NAME);
-		pr_warn("[!] Failed to create device\n");
+		pr_warn("[!] Failed to create device.\n");
 		return PTR_ERR(eud_char_device);
 	}
-	pr_info("[*] Eudyptula device created!\n");
+	pr_info("[*] Eudyptula device created.\n");
 	return 0;
 }
 
@@ -80,7 +78,7 @@ static void __exit hello_cleanup(void)
 	class_unregister(eud_char_class);
 	class_destroy(eud_char_class);
 	unregister_chrdev(major_number, DEVICE_NAME);
-	pr_info("[*] Goodbye world!\n");
+	pr_info("[*] Unloaded Eudyptula module.\n");
 }
 
 /*
@@ -90,7 +88,7 @@ static void __exit hello_cleanup(void)
 static int dev_open(struct inode *inodep, struct file *filep)
 {
 	number_opens++;
-	pr_info("[*] Eudyptula device opened %d times\n",number_opens);
+	pr_info("[*] Eudyptula device opened %d times\n.",number_opens);
 	return 0;
 }
 
@@ -100,14 +98,18 @@ static int dev_open(struct inode *inodep, struct file *filep)
 static ssize_t dev_read(struct file *filep, char *buffer, size_t len, loff_t *offset)
 {
 	int error_count = 0;
-
-	error_count = copy_to_user(buffer, message, size_of_message);
+	unsigned int msg_len = 0;
+	static char *msg = EUD_ID;
+	
+	msg_len = strlen(msg);
+	
+	error_count = copy_to_user(buffer, msg, msg_len);
 
 	if (0 == error_count) {
-		pr_info("[*] Sent %d characters to user\n", size_of_message);
-		return (size_of_message = 0);
+		pr_info("[*] Sent %d characters to user.\n", msg_len);
+		return (msg_len = 0);
 	} else {
-		pr_err("[!] Failed to send %d characters\n", size_of_message);
+		pr_err("[!] Failed to send %d characters.\n", msg_len);
 		return -EFAULT;
 	}
 }
@@ -117,10 +119,13 @@ static ssize_t dev_read(struct file *filep, char *buffer, size_t len, loff_t *of
  */
 static ssize_t dev_write(struct file *filep, const char *buffer, size_t len, loff_t *offset)
 {
-	sprintf(message, "%s(%zu letters)", buffer, len);
-	size_of_message = strlen(message);
-	pr_info("[*] Recieved %zu chars from user\n", len);
-	return len;
+	if (!strcmp(buffer, EUD_ID)) {
+		pr_info("[*] Recieved correct id: %s\n", buffer);
+		return 0;
+	} else {
+		pr_warn("[!] Recieved bad id: %s\n", buffer);
+		return -EINVAL;
+	}
 }
 
 /*
