@@ -1,5 +1,6 @@
-Managed to create a device. Need to write a program to test it.
-It doesn't do what the assignment asks yet, but it won't be a problem to implement it.
+Sent off and told that I didn't need to generate a major number.
+misc_devices always have a major number of 10 and generate minor_number easily.
+Updated to now be a proper misc device.
 
 # TODO
 Need to understand a bit better what the device class is.
