@@ -5,19 +5,20 @@
 #include <linux/fs.h>
 #include <asm/uaccess.h>
 #include <linux/device.h>
+#include <linux/miscdevice.h>
 
 #define DEVICE_NAME "eudyptula" // Name that will appear in /dev
-#define CLASS_NAME "eud" // Device class - character device driver
+//#define CLASS_NAME "eud" // Device class - character device driver
 #define EUD_ID "<ID>" // Eudyptula ID
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("BENJI");
 MODULE_DESCRIPTION("A simple Hello World module");
 
-static int major_number; // Stores the device number - auto generated
+//static int major_number; // Stores the device number - auto generated
 static int number_opens; // Number of times the device has been opened
-static struct class *eud_char_class = NULL; // Device class struct pointer
-static struct device *eud_char_device = NULL; // Device struct pointer
+//static struct class *eud_char_class = NULL; // Device class struct pointer
+//static struct device *eud_char_device = NULL; // Device struct pointer
 
 static int dev_open(struct inode *, struct file *);
 static int dev_release(struct inode *, struct file *);
@@ -37,47 +38,29 @@ static struct file_operations f_ops =
 	.release = dev_release,
 };
 
+struct miscdevice eud_device = {
+        .minor = MISC_DYNAMIC_MINOR,
+	.name = DEVICE_NAME,
+	.fops = &f_ops,
+};
+
 static int __init hello_init(void)
 {
 	pr_info("[*] Loaded Eudyptula module.\n");
-
-	// Try to dynamically generate a major number for device.
-	major_number = register_chrdev(0, DEVICE_NAME, &f_ops);
-	if (0 > major_number) {
-		pr_warn("[!] Failed to register major number.\n");
-		return major_number;
+	if (!misc_register(&eud_device)) {
+		pr_err("[!] Failed to register device\n");
+		return -1;
 	}
-	pr_info("[*] Registered major number: %d.\n", major_number);
-
-	// Register device class
-	eud_char_class = class_create(THIS_MODULE, CLASS_NAME);
-	if (IS_ERR(eud_char_class)) { // Check for error and clean up
-		unregister_chrdev(major_number, DEVICE_NAME);
-		pr_warn("[!] Failed to register device class.\n");
-		return PTR_ERR(eud_char_class); // Correct way to return an error on a pointer
-	}
+	pr_info("[*] Got minor device number: %i", eud_device.minor);
 	
-	pr_info("[*] Device class registered correctly.\n");
 
-	// Register device driver
-	eud_char_device = device_create(eud_char_class, NULL, 
-		MKDEV(major_number, 0), NULL, DEVICE_NAME);
-	if (IS_ERR(eud_char_device)) { // clean up if error
-		class_destroy(eud_char_class);
-		unregister_chrdev(major_number, DEVICE_NAME);
-		pr_warn("[!] Failed to create device.\n");
-		return PTR_ERR(eud_char_device);
-	}
 	pr_info("[*] Eudyptula device created.\n");
 	return 0;
 }
 
 static void __exit hello_cleanup(void)
 {
-	device_destroy(eud_char_class, MKDEV(major_number, 0));
-	class_unregister(eud_char_class);
-	class_destroy(eud_char_class);
-	unregister_chrdev(major_number, DEVICE_NAME);
+	misc_deregister(&eud_device);
 	pr_info("[*] Unloaded Eudyptula module.\n");
 }
 
