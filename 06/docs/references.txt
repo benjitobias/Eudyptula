@@ -1,4 +1,7 @@
 http://derekmolloy.ie/writing-a-linux-kernel-module-part-2-a-character-device/
+http://rpm.pbone.net/index.php3/stat/45/idpl/22867651/numer/9/nazwa/misc_register
+https://gist.github.com/17twenty/6313566
+http://www.linuxjournal.com/article/2920?page=0,0
 
 http://www-numi.fnal.gov/offline_software/srt_public_context/WebDocs/Errors/unix_system_errors.html
 
