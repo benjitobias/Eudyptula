@@ -1,12 +1,8 @@
-[148535.597000] [*] Device class registered correctly.
-[148535.597065] [*] Eudyptula device created.
-[148544.861504] [*] Eudyptula device opened 1 times
-                .
-[148544.861583] [!] Recieved bad id: test message
-[148544.861588] [*] Eudyptula device closed.
-[148581.661570] [*] Eudyptula device opened 2 times
-                .
-[148581.661643] [*] Recieved correct id: b9c2282a294c
-[148581.661651] [*] Sent 12 characters to user.
-[148581.661656] [*] Eudyptula device closed.
-[148590.443654] [*] Unloaded Eudyptula module.
+[  433.692602] [*] Got minor device number: 52
+[  433.692604] [*] Eudyptula device created.
+[  441.439036] [*] Eudyptula device opened 1 times
+               .
+[  441.439114] [*] Recieved correct id: b9c2282a294c
+[  441.439125] [*] Sent 12 characters to user.
+[  441.439136] [*] Eudyptula device closed.
+[  446.043946] [*] Unloaded Eudyptula module.
