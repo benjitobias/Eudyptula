@@ -9,7 +9,7 @@
 
 #define DEVICE_NAME "eudyptula" // Name that will appear in /dev
 //#define CLASS_NAME "eud" // Device class - character device driver
-#define EUD_ID "<ID>" // Eudyptula ID
+#define EUD_ID "b9c2282a294c" // Eudyptula ID
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("BENJI");
@@ -46,10 +46,12 @@ struct miscdevice eud_device = {
 
 static int __init hello_init(void)
 {
+	int error = 0;
 	pr_info("[*] Loaded Eudyptula module.\n");
-	if (!misc_register(&eud_device)) {
+	error = misc_register(&eud_device);
+	if (error) {
 		pr_err("[!] Failed to register device\n");
-		return -1;
+		return error;
 	}
 	pr_info("[*] Got minor device number: %i", eud_device.minor);
 	
