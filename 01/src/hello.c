@@ -1,9 +1,9 @@
 #include <linux/init.h>
-#include <linux/module.h> 
+#include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/kernel.h>
 #include <linux/fs.h>
-#include <asm/uaccess.h>
+#include <linux/uaccess.h>
 #include <linux/device.h>
 #include <linux/miscdevice.h>
 
@@ -30,8 +30,7 @@ static ssize_t dev_write(struct file *, const char *, size_t, loff_t *);
  * struct from /linux/fs.h lists the callback functions that you wish to
  * associate with the file operations.
  */
-static struct file_operations f_ops =
-{
+static struct file_operations f_ops = {
 	.open = dev_open,
 	.read = dev_read,
 	.write = dev_write,
@@ -39,7 +38,7 @@ static struct file_operations f_ops =
 };
 
 struct miscdevice eud_device = {
-        .minor = MISC_DYNAMIC_MINOR,
+	.minor = MISC_DYNAMIC_MINOR,
 	.name = DEVICE_NAME,
 	.fops = &f_ops,
 };
@@ -47,6 +46,7 @@ struct miscdevice eud_device = {
 static int __init hello_init(void)
 {
 	int error = 0;
+
 	pr_info("[*] Loaded Eudyptula module.\n");
 	error = misc_register(&eud_device);
 	if (error) {
@@ -54,7 +54,6 @@ static int __init hello_init(void)
 		return error;
 	}
 	pr_info("[*] Got minor device number: %i", eud_device.minor);
-	
 
 	pr_info("[*] Eudyptula device created.\n");
 	return 0;
@@ -73,7 +72,7 @@ static void __exit hello_cleanup(void)
 static int dev_open(struct inode *inodep, struct file *filep)
 {
 	number_opens++;
-	pr_info("[*] Eudyptula device opened %d times\n.",number_opens);
+	pr_info("[*] Eudyptula device opened %d times\n.", number_opens);
 	return 0;
 }
 
@@ -85,12 +84,11 @@ static ssize_t dev_read(struct file *filep, char *buffer, size_t len, loff_t *of
 	int error_count = 0;
 	unsigned int msg_len = 0;
 	static char *msg = EUD_ID;
-	
+
 	msg_len = strlen(msg);
-	
 	error_count = copy_to_user(buffer, msg, msg_len);
 
-	if (0 == error_count) {
+	if (error_count == 0) {
 		pr_info("[*] Sent %d characters to user.\n", msg_len);
 		return (msg_len = 0);
 	} else {
