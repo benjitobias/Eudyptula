@@ -1,8 +1,3 @@
-[  433.692602] [*] Got minor device number: 52
-[  433.692604] [*] Eudyptula device created.
-[  441.439036] [*] Eudyptula device opened 1 times
-               .
-[  441.439114] [*] Recieved correct id: b9c2282a294c
-[  441.439125] [*] Sent 12 characters to user.
-[  441.439136] [*] Eudyptula device closed.
-[  446.043946] [*] Unloaded Eudyptula module.
+[ 2764.988282] [*] Loaded Eudyptula module.
+[ 2764.988365] [*] Got minor device number: 52
+[ 2764.988367] [*] Eudyptula device created.
