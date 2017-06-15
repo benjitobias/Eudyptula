@@ -85,21 +85,7 @@ static ssize_t dev_read(struct file *filep, char *buffer, size_t len, loff_t *of
 	unsigned int msg_len = 0;
 	static char *msg = EUD_ID;
 
-	msg_len = strlen(msg);
-	if (msg_len > len) {
-		pr_err("[!] Message length too long.\n");
-		return -EFAULT;
-	}	
-
-	error_count = copy_to_user(buffer, msg, msg_len);
-	
-	if (error_count == 0) {
-		pr_info("[*] Sent %d characters to user.\n", msg_len);
-		return (msg_len = 0);
-	} else {
-		pr_err("[!] Failed to send %d characters.\n", msg_len);
-		return -EFAULT;
-	}
+	return copy_to_user(buffer, msg, len);
 }
 
 /*
