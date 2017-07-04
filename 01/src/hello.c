@@ -81,11 +81,7 @@ static int dev_open(struct inode *inodep, struct file *filep)
  */
 static ssize_t dev_read(struct file *filep, char *buffer, size_t len, loff_t *offset)
 {
-	int error_count = 0;
-	unsigned int msg_len = 0;
-	static char *msg = EUD_ID;
-
-	return copy_to_user(buffer, msg, len);
+	return simple_read_from_buffer(buffer, len, offset, EUD_ID, sizeof(EUD_ID));
 }
 
 /*
