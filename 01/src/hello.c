@@ -1,25 +1,19 @@
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
-#include <linux/kernel.h>
 #include <linux/fs.h>
 #include <linux/uaccess.h>
 #include <linux/device.h>
 #include <linux/miscdevice.h>
 
 #define DEVICE_NAME "eudyptula" // Name that will appear in /dev
-//#define CLASS_NAME "eud" // Device class - character device driver
 #define EUD_ID "b9c2282a294c" // Eudyptula ID
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("BENJI");
 MODULE_DESCRIPTION("A simple Hello World module");
 
-//static int major_number; // Stores the device number - auto generated
 static int number_opens; // Number of times the device has been opened
-//static struct class *eud_char_class = NULL; // Device class struct pointer
-//static struct device *eud_char_device = NULL; // Device struct pointer
-
 static int dev_open(struct inode *, struct file *);
 static int dev_release(struct inode *, struct file *);
 static ssize_t dev_read(struct file *, char *, size_t, loff_t *);
