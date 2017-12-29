@@ -8,6 +8,7 @@
 
 #define DEVICE_NAME "eudyptula" // Name that will appear in /dev
 #define EUD_ID "b9c2282a294c" // Eudyptula ID
+#define ID_LEN sizeof(EUD_ID)
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("BENJI");
@@ -81,15 +82,29 @@ static ssize_t dev_read(struct file *filep, char *buffer, size_t len, loff_t *of
 /*
  * Called whenever device is written to from user space.
  */
-static ssize_t dev_write(struct file *filep, const char *buffer, size_t len, loff_t *offset)
+static ssize_t dev_write(struct file *filep, const char __user *buffer, size_t len, loff_t *offset)
 {
-	if (!strcmp(buffer, EUD_ID)) {
-		pr_info("[*] Recieved correct id: %s\n", buffer);
-		return 0;
-	} else {
-		pr_warn("[!] Recieved bad id: %s\n", buffer);
-		return -EINVAL;
+	int val = 0;
+	char *kbuffer;
+
+	kbuffer = kzalloc(ID_LEN, sizeof(char));
+
+	val = simple_write_to_buffer(kbuffer, ID_LEN, offset, buffer, ID_LEN);
+
+	if (val > 0) {
+		if (strncmp(kbuffer, EUD_ID, ID_LEN - 1)) {
+			pr_warn("[!] Recieved bad id: %s\n", buffer);
+			val = -EINVAL;	
+			goto cleanup;
+		}
+
 	}
+
+	pr_info("[*] Recieved correct id: %s\n", buffer);	
+
+cleanup:
+	kfree(kbuffer);
+	return val;
 }
 
 /*
