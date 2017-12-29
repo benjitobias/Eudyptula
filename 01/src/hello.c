@@ -5,6 +5,7 @@
 #include <linux/uaccess.h>
 #include <linux/device.h>
 #include <linux/miscdevice.h>
+#include <linux/slab.h>
 
 #define DEVICE_NAME "eudyptula" // Name that will appear in /dev
 #define EUD_ID "b9c2282a294c" // Eudyptula ID
