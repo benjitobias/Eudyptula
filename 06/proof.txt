@@ -1,3 +1,21 @@
-[ 2764.988282] [*] Loaded Eudyptula module.
-[ 2764.988365] [*] Got minor device number: 52
-[ 2764.988367] [*] Eudyptula device created.
+$ dmesg | tail -13
+
+[24955.985925] [*] Loaded Eudyptula module.
+[24955.986172] [*] Got minor device number: 54
+[24955.986174] [*] Eudyptula device created.
+[25013.674404] [*] Eudyptula device opened 1 times
+               .
+[25029.610169] [*] Eudyptula device closed.
+[25032.874148] [*] Eudyptula device opened 2 times
+               .
+[25040.458181] [*] Recieved correct id: <ID>
+[25040.458191] [*] Eudyptula device closed.
+[25072.009753] [*] Eudyptula device opened 3 times
+               .
+[25072.010210] [*] Eudyptula device closed.
+
+$ ls /dev | grep eud
+eudyptula
+
+$ sudo cat /dev/eudyptula 
+<ID>
