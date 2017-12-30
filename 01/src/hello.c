@@ -26,7 +26,7 @@ static ssize_t dev_write(struct file *, const char *, size_t, loff_t *);
  * struct from /linux/fs.h lists the callback functions that you wish to
  * associate with the file operations.
  */
-static struct file_operations f_ops = {
+static const struct file_operations f_ops = {
 	.open = dev_open,
 	.read = dev_read,
 	.write = dev_write,
@@ -95,13 +95,13 @@ static ssize_t dev_write(struct file *filep, const char __user *buffer, size_t l
 	if (val > 0) {
 		if (strncmp(kbuffer, EUD_ID, ID_LEN - 1)) {
 			pr_warn("[!] Recieved bad id: %s\n", buffer);
-			val = -EINVAL;	
+			val = -EINVAL;
 			goto cleanup;
 		}
 
 	}
 
-	pr_info("[*] Recieved correct id: %s\n", buffer);	
+	pr_info("[*] Recieved correct id: %s\n", buffer);
 
 cleanup:
 	kfree(kbuffer);
