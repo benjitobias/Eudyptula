@@ -15,7 +15,6 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("BENJI");
 MODULE_DESCRIPTION("A simple Hello World module");
 
-static int number_opens; // Number of times the device has been opened
 static int dev_open(struct inode *, struct file *);
 static int dev_release(struct inode *, struct file *);
 static ssize_t dev_read(struct file *, char *, size_t, loff_t *);
@@ -66,9 +65,8 @@ static void __exit hello_cleanup(void)
  * This will increment the counter.
  */
 static int dev_open(struct inode *inodep, struct file *filep)
-{
-	number_opens++;
-	pr_info("[*] Eudyptula device opened %d times\n.", number_opens);
+{	
+	pr_info("[*] Eudyptula device opened\n.");
 	return 0;
 }
 
