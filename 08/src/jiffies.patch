@@ -1,0 +1,82 @@
+From 24db75affd5c2d734cbc97028903ff4ec9399b91 Mon Sep 17 00:00:00 2001
+From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+Date: Sat, 15 Sep 2018 14:59:05 +0300
+Subject: [PATCH 1/2] Added jiffies counter
+
+---
+ 08/src/debugfs.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/08/src/debugfs.c b/08/src/debugfs.c
+index 7bc0d10..38eee08 100644
+--- a/08/src/debugfs.c
++++ b/08/src/debugfs.c
+@@ -3,6 +3,7 @@
+ #include <linux/init.h> // included for __init and __exit macros
+ #include <linux/debugfs.h> // included for debugfs
+ #include <linux/fs.h>
++#include <linux/jiffies.h>
+ 
+ MODULE_LICENSE("GPL");
+ MODULE_AUTHOR("BENJI");
+@@ -32,6 +33,7 @@ static const struct file_operations f_ops = {
+ static int __init hello_init(void)
+ {
+ 	struct dentry *junk;
++	//u32 now_tick = jiffies;
+ 
+ 	printk(KERN_DEBUG "eudyptula 08: Loaded!\n");
+ 
+@@ -47,6 +49,13 @@ static int __init hello_init(void)
+ 		printk(KERN_ALERT, "eudyptula 08: failed to create /sys/kernel/debug/eudyptula/id\n");
+ 		return -2;
+ 	}
++	
++//	junk = debugfs_create_u32("jiffies", 0444, dir, &now_tick);
++	junk = debugfs_create_u32("jiffies", 0444, dir, (u32 *)&jiffies);
++	//if (!junk) {
++	//	printk(KERN_ALERT, "eudyptula 08: failed to create /sys/kernel/debug/eudyptula/jiffies\n");
++	//	return -3;
++	//}
+ 
+ 	return 0; // Non-zero return means that the module couldn't be loaded.
+ }
+-- 
+2.7.4
+
+
+From 06d05ddf7b3687ee0fbd6b330794df9aaa2880b1 Mon Sep 17 00:00:00 2001
+From: "benjitobias@gmail.com" <benjitobias@gmail.com>
+Date: Sat, 15 Sep 2018 19:18:32 +0300
+Subject: [PATCH 2/2] Added error check
+
+---
+ 08/src/debugfs.c | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
+
+diff --git a/08/src/debugfs.c b/08/src/debugfs.c
+index 38eee08..c2dd08c 100644
+--- a/08/src/debugfs.c
++++ b/08/src/debugfs.c
+@@ -49,13 +49,12 @@ static int __init hello_init(void)
+ 		printk(KERN_ALERT, "eudyptula 08: failed to create /sys/kernel/debug/eudyptula/id\n");
+ 		return -2;
+ 	}
+-	
+-//	junk = debugfs_create_u32("jiffies", 0444, dir, &now_tick);
++
+ 	junk = debugfs_create_u32("jiffies", 0444, dir, (u32 *)&jiffies);
+-	//if (!junk) {
+-	//	printk(KERN_ALERT, "eudyptula 08: failed to create /sys/kernel/debug/eudyptula/jiffies\n");
+-	//	return -3;
+-	//}
++	if (!junk) {
++		printk(KERN_ALERT, "eudyptula 08: failed to create /sys/kernel/debug/eudyptula/jiffies\n");
++		return -3;
++	}
+ 
+ 	return 0; // Non-zero return means that the module couldn't be loaded.
+ }
+-- 
+2.7.4
+
