@@ -3,6 +3,7 @@
 #include <linux/init.h> // included for __init and __exit macros
 #include <linux/debugfs.h> // included for debugfs
 #include <linux/fs.h>
+#include <linux/jiffies.h>
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("BENJI");
@@ -32,6 +33,7 @@ static const struct file_operations f_ops = {
 static int __init hello_init(void)
 {
 	struct dentry *junk;
+	//u32 now_tick = jiffies;
 
 	printk(KERN_DEBUG "eudyptula 08: Loaded!\n");
 
@@ -47,6 +49,13 @@ static int __init hello_init(void)
 		printk(KERN_ALERT, "eudyptula 08: failed to create /sys/kernel/debug/eudyptula/id\n");
 		return -2;
 	}
+	
+//	junk = debugfs_create_u32("jiffies", 0444, dir, &now_tick);
+	junk = debugfs_create_u32("jiffies", 0444, dir, (u32 *)&jiffies);
+	//if (!junk) {
+	//	printk(KERN_ALERT, "eudyptula 08: failed to create /sys/kernel/debug/eudyptula/jiffies\n");
+	//	return -3;
+	//}
 
 	return 0; // Non-zero return means that the module couldn't be loaded.
 }
