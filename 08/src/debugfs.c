@@ -8,7 +8,7 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("BENJI");
 MODULE_DESCRIPTION("Eudyptula 08 debugfs module");
 
-#define EUD_ID "b9c2282a294c"
+#define EUD_ID "<ID>"
 #define ID_LEN sizeof(EUD_ID)
 
 // Directory entry point will point to '/sys/kernel/debug/eudyptula'
