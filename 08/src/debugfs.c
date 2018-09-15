@@ -49,13 +49,12 @@ static int __init hello_init(void)
 		printk(KERN_ALERT, "eudyptula 08: failed to create /sys/kernel/debug/eudyptula/id\n");
 		return -2;
 	}
-	
-//	junk = debugfs_create_u32("jiffies", 0444, dir, &now_tick);
+
 	junk = debugfs_create_u32("jiffies", 0444, dir, (u32 *)&jiffies);
-	//if (!junk) {
-	//	printk(KERN_ALERT, "eudyptula 08: failed to create /sys/kernel/debug/eudyptula/jiffies\n");
-	//	return -3;
-	//}
+	if (!junk) {
+		printk(KERN_ALERT, "eudyptula 08: failed to create /sys/kernel/debug/eudyptula/jiffies\n");
+		return -3;
+	}
 
 	return 0; // Non-zero return means that the module couldn't be loaded.
 }
